@@ -1,4 +1,9 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, redirect, url_for, flash
+from models.base_model import db, BaseModel
+from models.buyer import Buyer
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_wtf.csrf import CSRFProtect
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 
 
 buyers_blueprint = Blueprint('buyers',
@@ -13,7 +18,21 @@ def new():
 
 @buyers_blueprint.route('/', methods=['POST'])
 def create():
-    pass
+   
+    user_password = request.form['password']
+    hashed_password = generate_password_hash(user_password)
+
+    buyer = Buyer(username=request.form['username'],
+                email=request.form['email'], password=hashed_password)
+
+    if buyer.save():
+        flash("Successfully registered")
+        session['username'] = request.form['username']
+        login_user(buyer)
+        return redirect(url_for('buyers.index'))
+    else:
+        return render_template('buyers/new.html', username=request.form['username'], email=request.form['email'], password=request.form['password'], errors=buyer.errors)
+
 
 
 @buyers_blueprint.route('/<username>', methods=["GET"])
