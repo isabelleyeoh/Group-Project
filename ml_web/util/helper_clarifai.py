@@ -1,10 +1,12 @@
-import app
 from clarifai.rest import ClarifaiApp
+from app import app
+import os
 
-app_clarifai = ClarifaiApp(api_key='0392301fc5b540f7aa868e5b1cf82c16')
 
+app_clarifai=ClarifaiApp(api_key=app.config['CLARIFAI_API_KEY'])
 
 def get_relevant_tags(image_url):
+
     general_model = app_clarifai.public_models.general_model
     response_data = general_model.predict_by_url(url=image_url)
 
