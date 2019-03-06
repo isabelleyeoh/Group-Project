@@ -9,6 +9,8 @@ class Config(object):
         'SECRET_KEY') or os.urandom(32)
     CLARIFAI_API_KEY = os.environ.get('CLARIFAI_API_KEY')
     CLARIFAI_APP_ID = os.environ.get('CLARIFAI_APP_ID')
+    GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID")
+    GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET")
 
 class ProductionConfig(Config):
     DEBUG = False
