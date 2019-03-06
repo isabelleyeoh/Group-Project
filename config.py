@@ -7,7 +7,8 @@ class Config(object):
     CSRF_ENABLED = True
     SECRET_KEY = os.environ.get(
         'SECRET_KEY') or os.urandom(32)
-
+    CLARIFAI_API_KEY = os.environ.get('CLARIFAI_API_KEY')
+    CLARIFAI_APP_ID = os.environ.get('CLARIFAI_APP_ID')
 
 class ProductionConfig(Config):
     DEBUG = False
@@ -29,3 +30,7 @@ class TestingConfig(Config):
     TESTING = True
     DEBUG = True
     ASSETS_DEBUG = True
+
+SECRET_KEY = os.urandom(32)
+DEBUG = True
+PORT = 5000
