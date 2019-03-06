@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template
-from ml_web.util.helper_clarifai import app_clarifai, get_relevant_tags
+from ml_web.util.helper_clarifai import app_clarifai, predict_image_celebrity
+
+
 
 images_blueprint = Blueprint('images',
                             __name__,
@@ -38,8 +40,11 @@ def update(id):
 
 
 @images_blueprint.route('/test_search', methods=['GET'])
-def test_search():
-    result = get_relevant_tags('https://sanrio-production-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTYvMDYvMTQvMjAvNDgvMzQvMTM3L2NocmFjdGVyX2hlbGxvX2tpdHR5LmpwZyJdLFsicCIsIm9wdGltIl1d/chracter-hello-kitty.jpg?sha=bb1658addec8d1b7')
+def predict_celebrity():
+
+    model='celeb-v1.3'
+    image='https://akns-images.eonline.com/eol_images/Entire_Site/2018729/rs_1024x759-180829091909-1024-Kirk-Douglas-JR-082918.jpg?fit=inside|900:auto&output-quality=90'
+    result = predict_image_celebrity(image=image, model=model)
 
     print(result)
 
