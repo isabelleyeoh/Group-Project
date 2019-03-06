@@ -5,6 +5,9 @@ from models.base_model import db
 from clarifai.rest import ClarifaiApp
 
 
+# Clarifai
+from clarifai.rest import ClarifaiApp
+
 web_dir = os.path.join(os.path.dirname(
     os.path.abspath(__file__)), 'ml_web')
 
