@@ -12,6 +12,7 @@ def get_relevant_tags(image_url):
 
     predict_by_url = []
     for concept in response_data['outputs'][0]['data']['concepts']:
-        predict_by_url.append(concept['name'])
+        val = (concept['name'],concept['value'])
+        predict_by_url.append(val)
 
     return predict_by_url

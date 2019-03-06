@@ -9,11 +9,7 @@ images_blueprint = Blueprint('images',
 @images_blueprint.route('/new', methods=['GET'])
 def new():
 
-    result = get_relevant_tags('https://samples.clarifai.com/metro-north.jpg')
-
-    print(result)
-
-    return render_template('images/new.html')
+    pass
 
 
 @images_blueprint.route('/', methods=['POST'])
@@ -39,3 +35,12 @@ def edit(id):
 @images_blueprint.route('/<id>', methods=['POST'])
 def update(id):
     pass
+
+
+@images_blueprint.route('/test_search', methods=['GET'])
+def test_search():
+    result = get_relevant_tags('https://sanrio-production-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTYvMDYvMTQvMjAvNDgvMzQvMTM3L2NocmFjdGVyX2hlbGxvX2tpdHR5LmpwZyJdLFsicCIsIm9wdGltIl1d/chracter-hello-kitty.jpg?sha=bb1658addec8d1b7')
+
+    print(result)
+
+    return render_template('images/new.html')
