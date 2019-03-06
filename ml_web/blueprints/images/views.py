@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-
+from ml_web.util.helper_clarifai import app_clarifai, get_relevant_tags
 
 images_blueprint = Blueprint('images',
                             __name__,
@@ -8,6 +8,11 @@ images_blueprint = Blueprint('images',
 
 @images_blueprint.route('/new', methods=['GET'])
 def new():
+
+    result = get_relevant_tags('https://samples.clarifai.com/metro-north.jpg')
+
+    print(result)
+
     return render_template('images/new.html')
 
 
