@@ -21,7 +21,17 @@ def new():
 
 @sessions_blueprint.route('/', methods=['POST'])
 def create():
-    session['username'] = request.form['username']
+    
+
+
+@sessions_blueprint.route('/login', methods=['GET'])
+def login():
+
+
+
+@sessions_blueprint.route('/', methods=['POST'])
+def check():
+    username = request.form['username']
     email_to_check = request.form['email']
     password_to_check = request.form['password']
     user = Buyer.get_or_none(Buyer.email == email_to_check) or Seller.get_or_none(Seller.email == email_to_check)

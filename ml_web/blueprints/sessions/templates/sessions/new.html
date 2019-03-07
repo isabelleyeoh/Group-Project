@@ -14,7 +14,8 @@
         </legend>
         
 
-        <form>    
+        <form action="{{ url_for('create') }}" method="POST">
+          <input type="hidden" value="{{csrf_token()}}" name='csrf_token'>    
             <!--=======BUYER SELLER =======-->
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -40,22 +41,37 @@
     $('#userType').on('change', function() {
       if ($('#userType').val() == 1) {
 
-        let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Full name" aria-label="Username" aria-describedby="basic-addon1"></div>'
+        let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Full name" name="username"></div>'
 
         let email = '<div class="input-group mb-3">\
-          <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Email address" aria-label="Username" aria-describedby="basic-addon1"></div>'
+          <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Email address" name="email"></div>'
 
-        let password='password\
-        div 
-        '
+        let password='<div class="input-group mb-3">\
+            <div class="input-group-prepend">\
+            <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>\
+            </div>\
+            <input type="text" class="form-control" placeholder="Password" name="password">\
+            </div>'
 
+        let button = '<button class="btn btn-primary col-12 form-group">Create Account</button>\
+        <p class="text-center">Have an Account? <a href="#">Log In</a></p>'
 
-        $('#dynamic-form').html(fullname + email)
+        $('#dynamic-form').html(fullname + email + password + button) 
 
       }else if($('#userType').val() == 2) {
 
-        
+        let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Full name" name="username"></div>'
 
+        let email = '<div class="input-group mb-3">\
+          <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Email address" name="email"></div>'
+
+        let button = '<button class="btn btn-primary col-12 form-group">Create Account</button>\
+          <p class="text-center">Have an Account? <a href="#">Log In</a></p>'
+
+        $('#dynamic-form').html(fullname + email + button)
+
+      }else {
+        $('#dynamic-form').html('')
       }
     });
   });
@@ -63,5 +79,4 @@
 
 
 </script>
-<script src=""></script>
 {% endblock %}
