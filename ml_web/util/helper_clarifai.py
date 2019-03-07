@@ -1,15 +1,25 @@
-import app
 from clarifai.rest import ClarifaiApp
+from app import app
+import os
+from clarifai.rest import Image as ClImage
 
-app_clarifai = ClarifaiApp(api_key='0392301fc5b540f7aa868e5b1cf82c16')
+app_clarifai=ClarifaiApp(api_key=app.config['CLARIFAI_API_KEY'])
 
+# Clarifai - get relevant image tags based on specified Clarifai model
+def predict_image_celebrity(image, model):
 
-def get_relevant_tags(image_url):
-    general_model = app_clarifai.public_models.general_model
-    response_data = general_model.predict_by_url(url=image_url)
-
+    model = app_clarifai.models.get(model)
+    image = ClImage(url=image)
+    response_data = model.predict([image])
     predict_by_url = []
-    for concept in response_data['outputs'][0]['data']['concepts']:
-        predict_by_url.append(concept['name'])
+    for concept in response_data['outputs'][0]['data']['regions'][0]['data']['face']['identity']['concepts']:
+        if concept['value']>0.95: 
+            val = (concept['name'],concept['value'])
+            predict_by_url.append(val)
+        else:
+            pass
 
     return predict_by_url
+
+
+
