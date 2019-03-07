@@ -14,7 +14,11 @@
         </legend>
         
 
+<<<<<<< refs/remotes/origin/feat/registration
         <form action="{{ url_for('sessions.create') }}" method="POST">
+=======
+        <form action="{{ url_for('create') }}" method="POST">
+>>>>>>> 'form'
           <input type="hidden" value="{{csrf_token()}}" name='csrf_token'>    
             <!--=======BUYER SELLER =======-->
           <div class="input-group mb-3">
@@ -99,16 +103,27 @@
     $('#userType').on('change', function() {
       if ($('#userType').val() == 1) {
 
+<<<<<<< refs/remotes/origin/feat/registration
         let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Buyer Full name" name="username"></div>'
 
         let email = '<div class="input-group mb-3">\
           <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Buyer Email address" name="email"></div>'
+=======
+        let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Full name" name="username"></div>'
+
+        let email = '<div class="input-group mb-3">\
+          <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Email address" name="email"></div>'
+>>>>>>> 'form'
 
         let password='<div class="input-group mb-3">\
             <div class="input-group-prepend">\
             <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>\
             </div>\
+<<<<<<< refs/remotes/origin/feat/registration
             <input type="password" class="form-control" placeholder="Buyer Password" name="password">\
+=======
+            <input type="text" class="form-control" placeholder="Password" name="password">\
+>>>>>>> 'form'
             </div>'
 
         let button = '<button class="btn btn-primary col-12 form-group">Create Account</button>\
@@ -118,6 +133,7 @@
 
       }else if($('#userType').val() == 2) {
 
+<<<<<<< refs/remotes/origin/feat/registration
         let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Seller Full name" name="username"></div>'
 
         let email = '<div class="input-group mb-3">\
@@ -129,11 +145,21 @@
             </div>\
             <input type="password" class="form-control" placeholder="Seller Password" name="password">\
             </div>'
+=======
+        let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Full name" name="username"></div>'
+
+        let email = '<div class="input-group mb-3">\
+          <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Email address" name="email"></div>'
+>>>>>>> 'form'
 
         let button = '<button class="btn btn-primary col-12 form-group">Create Account</button>\
           <p class="text-center">Have an Account? <a href="#">Log In</a></p>'
 
+<<<<<<< refs/remotes/origin/feat/registration
         $('#dynamic-form').html(fullname + email + password + button)
+=======
+        $('#dynamic-form').html(fullname + email + button)
+>>>>>>> 'form'
 
       }else {
         $('#dynamic-form').html('')
@@ -144,5 +170,4 @@
 
 
 </script>
-<script src=""></script>
 {% endblock %}

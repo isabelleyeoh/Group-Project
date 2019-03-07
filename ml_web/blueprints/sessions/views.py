@@ -21,6 +21,7 @@ def new(usertype):
 
 @sessions_blueprint.route('/', methods=['POST'])
 def create():
+<<<<<<< refs/remotes/origin/feat/registration
     userType = int(request.form['userType'])
     username = request.form['username']
     email = request.form['email']
@@ -36,11 +37,18 @@ def create():
         seller = Seller(username=username, email=email, password=hashed_password)
         seller.save()
         return 'seller registered'
+=======
+    
+>>>>>>> 'form'
 
 
 @sessions_blueprint.route('/login', methods=['GET'])
 def login():
+<<<<<<< refs/remotes/origin/feat/registration
     return render_template('sessions/login.html')
+=======
+
+>>>>>>> 'form'
 
 
 @sessions_blueprint.route('/', methods=['POST'])
