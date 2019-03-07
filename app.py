@@ -14,10 +14,10 @@ if os.getenv('FLASK_ENV') == 'development':
 else:
     app.config.from_object("config.DevelopmentConfig")
 
-@app.route('/')
-def index():
+# @app.route('/')
+# def index():
     
-    return "Pass"
+#     return "Pass"
 
 @app.before_request
 def before_request():
