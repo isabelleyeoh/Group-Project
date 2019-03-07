@@ -1,1 +1,64 @@
-<h1>Users#new</h1>
+{% extends '_layout.html' %}
+
+
+{% block header %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+<div class='container'>
+    <div class='col-6 offset-3 jumbotron registration mt-4'>
+        <legend class='text-center'>
+            <h1>Create Account</h1>
+            <p>Get started with your free account</p>
+        </legend>
+        
+
+        <form>    
+            <!--=======BUYER SELLER =======-->
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-md"></i></span>
+            </div>
+            <select class="custom-select" id="userType">
+              <option selected>Choose...</option>
+              <option value="1">Buyer</option>
+              <option value="2">Seler</option>
+            </select>
+          </div>
+          
+          <div id='dynamic-form'>
+
+          </div>
+        </form>
+
+    </div>	
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+  $(document).ready(function() {
+    $('#userType').on('change', function() {
+      if ($('#userType').val() == 1) {
+
+        let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Full name" aria-label="Username" aria-describedby="basic-addon1"></div>'
+
+        let email = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Email address" aria-label="Username" aria-describedby="basic-addon1"></div>'
+
+        let 
+
+        $('#dynamic-form').html(fullname + email)
+
+      }else if($('#userType').val() == 2) {
+
+        
+
+      }
+    });
+  });
+
+
+
+</script>
+{% endblock %}
