@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from ml_web.util.helper_clarifai import app_clarifai, predict_image_celebrity
+from ml_web.util.helper_clarifai import app_clarifai, predict_image_celebrity,predict_model_chair
 
 
 
@@ -39,13 +39,26 @@ def update(id):
     pass
 
 
-@images_blueprint.route('/test_search', methods=['GET'])
+@images_blueprint.route('/predict_celebrity', methods=['GET'])
 def predict_celebrity():
 
-    model='celeb-v1.3'
-    image='https://akns-images.eonline.com/eol_images/Entire_Site/2018729/rs_1024x759-180829091909-1024-Kirk-Douglas-JR-082918.jpg?fit=inside|900:auto&output-quality=90'
+    model='Celebrity'
+    image=''
     result = predict_image_celebrity(image=image, model=model)
 
     print(result)
+
+    return render_template('images/new.html')
+
+# Custom Model - predict chair type with input of local file
+@images_blueprint.route('/predict_chair', methods=['GET'])
+def predict_chair():
+    input_file=True #True if using local path. False if using URL
+    model='Next_Academy_Project'
+    image_path='/Users/jianming/Desktop/Herman_Miller_Test.jpeg'
+    result = predict_model_chair(image_path=image_path, model=model, input_file=input_file)
+
+    for x,y in result:
+        print(f'The {x} concept has a {y} probability of matching your input.')
 
     return render_template('images/new.html')

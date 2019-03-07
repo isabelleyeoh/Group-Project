@@ -12,6 +12,7 @@ def predict_image_celebrity(image, model):
     image = ClImage(url=image)
     response_data = model.predict([image])
     predict_by_url = []
+
     for concept in response_data['outputs'][0]['data']['regions'][0]['data']['face']['identity']['concepts']:
         if concept['value']>0.95: 
             val = (concept['name'],concept['value'])
@@ -20,6 +21,29 @@ def predict_image_celebrity(image, model):
             pass
 
     return predict_by_url
+
+# Clarifai - predict chair
+def predict_model_chair(image_path, model,input_file):
+
+    model = app_clarifai.models.get(model)
+
+    if input_file==True:
+        image = app_clarifai.inputs.create_image_from_filename(filename=image_path)
+    else:
+        image = app_clarifai.inputs.create_image_from_url(url=image_path)
+        
+    response_data = model.predict([image])
+    predict_by_url = []
+
+    for concept in response_data['outputs'][0]['data']['concepts']:
+        if concept['value']>0: 
+            val = (concept['name'],concept['value'])
+            predict_by_url.append(val)
+        else:
+            pass
+
+    return predict_by_url
+
 
 
 
