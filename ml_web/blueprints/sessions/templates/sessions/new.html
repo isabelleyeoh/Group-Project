@@ -34,9 +34,7 @@
 
     </div>	
 </div>
-{% endblock %}
 
-{% block js %}
 <script>
   $(document).ready(function() {
     $('#userType').on('change', function() {
@@ -44,9 +42,13 @@
 
         let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Full name" aria-label="Username" aria-describedby="basic-addon1"></div>'
 
-        let email = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Email address" aria-label="Username" aria-describedby="basic-addon1"></div>'
+        let email = '<div class="input-group mb-3">\
+          <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Email address" aria-label="Username" aria-describedby="basic-addon1"></div>'
 
-        let 
+        let password='password\
+        div 
+        '
+
 
         $('#dynamic-form').html(fullname + email)
 
@@ -61,4 +63,5 @@
 
 
 </script>
+<script src=""></script>
 {% endblock %}
