@@ -1,6 +1,6 @@
 import os
 import config
-from flask import Flask
+from flask import Flask, render_template
 from models.base_model import db
 
 
@@ -16,8 +16,7 @@ else:
 
 @app.route('/')
 def index():
-    
-    return "Pass"
+    return render_template('home.html')
 
 @app.before_request
 def before_request():
