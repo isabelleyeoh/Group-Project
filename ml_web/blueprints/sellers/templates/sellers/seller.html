@@ -1,0 +1,237 @@
+{% extends "_layout.html" %}
+{% block title %}
+  Homepage
+{% endblock %}
+{% block header %}
+
+<link href="/ml_web/static/css/seller_custom.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" a href="{{ url_for('home')}}">Project</a>
+      <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#">Techonologies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#Projects">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#signup">Logout</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+          <div class="col-xs-12 col-sm-9">
+            
+            <!-- User profile -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+              <h4 class="panel-title">User profile</h4>
+              </div>
+              <div class="panel-body">
+                <div class="profile__avatar">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="...">
+                </div>
+                <div class="profile__header">
+                  <h4>Richard Roe <small>Administrator</small></h4>
+                  <p class="text-muted">
+                    hello everyone
+                  </p>
+                  
+                </div>
+              </div>
+            </div>
+    
+            <!-- User info -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+              <h4 class="panel-title">User info</h4>
+              </div>
+              <div class="panel-body">
+                <table class="table profile__table">
+                  <tbody>
+                    <tr>
+                      <th><strong>Location</strong></th>
+                      <td>United States</td>
+                    </tr>
+                    <tr>
+                      <th><strong>Company name</strong></th>
+                      <td>Simpleqode.com</td>
+                    </tr>
+                    <tr>
+                      <th><strong>Position</strong></th>
+                      <td>Front-end developer</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+    
+            <!-- Community -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+              <h4 class="panel-title">Community</h4>
+              </div>
+              <div class="panel-body">
+                <table class="table profile__table">
+                  <tbody>
+                    <tr>
+                      <th><strong>Comments</strong></th>
+                      <td>58584</td>
+                    </tr>
+                    <tr>
+                      <th><strong>Member since</strong></th>
+                      <td>Jan 01, 2016</td>
+                    </tr>
+                    <tr>
+                      <th><strong>Last login</strong></th>
+                      <td>1 day ago</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+    
+            <!-- Latest posts -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+              <h4 class="panel-title">Latest posts</h4>
+              </div>
+              <div class="panel-body">
+                <div class="profile__comments">
+                  <div class="profile-comments__item">
+                    <div class="profile-comments__controls">
+                      <a href="#"><i class="fa fa-share-square-o"></i></a>
+                      <a href="#"><i class="fa fa-edit"></i></a>
+                      <a href="#"><i class="fa fa-trash-o"></i></a>
+                    </div>
+                    <div class="profile-comments__avatar">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
+                    </div>
+                    <div class="profile-comments__body">
+                      <h5 class="profile-comments__sender">
+                        Richard Roe <small>2 hours ago</small>
+                      </h5>
+                      <div class="profile-comments__content">
+                       good work
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile-comments__item">
+                    <div class="profile-comments__controls">
+                      <a href="#"><i class="fa fa-share-square-o"></i></a>
+                      <a href="#"><i class="fa fa-edit"></i></a>
+                      <a href="#"><i class="fa fa-trash-o"></i></a>
+                    </div>
+                    <div class="profile-comments__avatar">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="...">
+                    </div>
+                    <div class="profile-comments__body">
+                      <h5 class="profile-comments__sender">
+                        Richard Roe <small>5 hours ago</small>
+                      </h5>
+                      <div class="profile-comments__content">
+                        that is good
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile-comments__item">
+                    <div class="profile-comments__controls">
+                      <a href="#"><i class="fa fa-share-square-o"></i></a>
+                      <a href="#"><i class="fa fa-edit"></i></a>
+                      <a href="#"><i class="fa fa-trash-o"></i></a>
+                    </div>
+                    <div class="profile-comments__avatar">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="...">
+                    </div>
+                    <div class="profile-comments__body">
+                      <h5 class="profile-comments__sender">
+                        Richard Roe <small>1 day ago</small>
+                      </h5>
+                      <div class="profile-comments__content">
+                        amazing
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            
+            <!-- Contact user -->
+            <p>
+              <a href="#" class="profile__contact-btn btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#profile__contact-form">
+                Contact user
+              </a>
+            </p>
+    
+            <hr class="profile__contact-hr">
+            
+            <!-- Contact info -->
+            <div class="profile__contact-info">
+              <div class="profile__contact-info-item">
+                <div class="profile__contact-info-icon">
+                  <i class="fa fa-phone"></i>
+                </div>
+                <div class="profile__contact-info-body">
+                  <h5 class="profile__contact-info-heading">Work number</h5>
+                  (000)12345678
+                </div>
+              </div>
+              <div class="profile__contact-info-item">
+                <div class="profile__contact-info-icon">
+                  <i class="fa fa-phone"></i>
+                </div>
+                <div class="profile__contact-info-body">
+                  <h5 class="profile__contact-info-heading">Mobile number</h5>
+                  (00)12345678
+                </div>
+              </div>
+              <div class="profile__contact-info-item">
+                <div class="profile__contact-info-icon">
+                  <i class="fa fa-envelope-square"></i>
+                </div>
+                <div class="profile__contact-info-body">
+                  <h5 class="profile__contact-info-heading">E-mail address</h5>
+                  <a href="mailto:admin@domain.com">admin@domain.com</a>
+                </div>
+              </div>
+              <div class="profile__contact-info-item">
+                <div class="profile__contact-info-icon">
+                  <i class="fa fa-map-marker"></i>
+                </div>
+                <div class="profile__contact-info-body">
+                  <h5 class="profile__contact-info-heading">Work address</h5>
+                  
+                </div>
+              </div>
+            </div>
+    
+          </div>
+        </div>
+    </div>
+
+    {% endblock %}
