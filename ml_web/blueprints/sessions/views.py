@@ -14,19 +14,33 @@ sessions_blueprint = Blueprint('sessions',
                             template_folder='templates')
 
 
-@sessions_blueprint.route('/new', methods=['GET'])
-def new():
-    return render_template('sessions/new.html')
+@sessions_blueprint.route('/new/<usertype>', methods=['GET'])
+def new(usertype):
+    return render_template('sessions/new.html', usertype=usertype)
 
 
 @sessions_blueprint.route('/', methods=['POST'])
 def create():
+    userType = int(request.form['userType'])
+    username = request.form['username']
+    email = request.form['email']
+    password = request.form['password']
+    hashed_password = generate_password_hash(password)
     
+    if userType == 1:
+        buyer = Buyer(username=username, email=email, password=hashed_password)
+        buyer.save()
+        return 'Buyer registered'
+
+    elif userType == 2:
+        seller = Seller(username=username, email=email, password=hashed_password)
+        seller.save()
+        return 'seller registered'
 
 
 @sessions_blueprint.route('/login', methods=['GET'])
 def login():
-
+    return render_template('sessions/login.html')
 
 
 @sessions_blueprint.route('/', methods=['POST'])
@@ -40,10 +54,10 @@ def check():
 
     if result:
         login_user(buyer) or login_user(seller)
-        return redirect(url_for('home'))
+        return 'logged in'
     else:
         flash("Wrong password")
-        return render_template('signin.html')
+        return 'logged in failed'
 
 
 @sessions_blueprint.route('/signin/google', methods=['GET'])
