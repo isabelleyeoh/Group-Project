@@ -1,6 +1,6 @@
 {% extends "_layout.html" %}
 {% block title %}
-  Homepage
+Homepage
 {% endblock %}
 {% block header %}
 <meta charset="utf-8">
@@ -16,7 +16,9 @@
 <!-- Custom fonts for this template -->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+  rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="/ml_web/static/css/custom.css" rel="stylesheet">
@@ -30,7 +32,9 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">project</a>
-      <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
       </button>
@@ -54,10 +58,11 @@
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Signup</a></li>
+          <li><a href="{{ url_for('sessions.new', usertype=usertype) }}"><span class="glyphicon glyphicon-user"></span>
+              Sign Up</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" style='margin-left: 5px;'>
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+          <li><a href="{{ url_for('sessions.login')}}"><span class="glyphicon glyphicon-user"></span> Login</a></li>
         </ul>
       </div>
     </div>
@@ -115,7 +120,8 @@
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-left">
                 <h4 class="text-white">unknown</h4>
-                <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else,
+                  along with a description.</p>
                 <hr class="d-none d-lg-block mb-0 ml-0">
               </div>
             </div>
@@ -133,7 +139,8 @@
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-right">
                 <h4 class="text-white">unknown</h4>
-                <p class="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                <p class="mb-0 text-white-50">Another example of a project with its respective description. These
+                  sections work well responsively as well, try this theme on a small screen!</p>
                 <hr class="d-none d-lg-block mb-0 mr-0">
               </div>
             </div>
@@ -154,7 +161,8 @@
           <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
 
           <form class="form-inline d-flex">
-            <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address...">
+            <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail"
+              placeholder="Enter email address...">
             <button type="submit" class="btn btn-primary mx-auto">Subscribe</button>
           </form>
 
@@ -215,7 +223,7 @@
         <a href="#" class="mx-2">
           <i class="fab fa-github"></i>
         </a>
-        
+
         </a>
       </div>
 
@@ -236,14 +244,12 @@
   <!-- Plugin JavaScript -->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  
+
   <script src="js/homepage.js"></script>
 
-  <script>!function(e){"use strict";e('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function(){if(location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname){var a=e(this.hash);if((a=a.length?a:e("[name="+this.hash.slice(1)+"]")).length)return e("html, body").animate({scrollTop:a.offset().top-70},1e3,"easeInOutExpo"),!1}}),e(".js-scroll-trigger").click(function(){e(".navbar-collapse").collapse("hide")}),e("body").scrollspy({target:"#mainNav",offset:100});var a=function(){100<e("#mainNav").offset().top?e("#mainNav").addClass("navbar-shrink"):e("#mainNav").removeClass("navbar-shrink")};a(),e(window).scroll(a)}(jQuery);</script>
+  <script>!function (e) { "use strict"; e('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () { if (location.pathname.replace(/^\//, "") == this.pathname.replace(/^\//, "") && location.hostname == this.hostname) { var a = e(this.hash); if ((a = a.length ? a : e("[name=" + this.hash.slice(1) + "]")).length) return e("html, body").animate({ scrollTop: a.offset().top - 70 }, 1e3, "easeInOutExpo"), !1 } }), e(".js-scroll-trigger").click(function () { e(".navbar-collapse").collapse("hide") }), e("body").scrollspy({ target: "#mainNav", offset: 100 }); var a = function () { 100 < e("#mainNav").offset().top ? e("#mainNav").addClass("navbar-shrink") : e("#mainNav").removeClass("navbar-shrink") }; a(), e(window).scroll(a) }(jQuery);</script>
 
 </body>
 
 
 {% endblock %}
-
-

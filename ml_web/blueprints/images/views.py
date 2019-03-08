@@ -43,14 +43,13 @@ def update(id):
 def predict_chair():
     input_file=False #True if using local path. False if using URL
     model='Next_Academy_Project'
-    image_path='https://www.ikea.com/gb/en/images/products/jokkmokk-chair-antique-stain__0475400_pe615581_s4.jpg'
+    image_path='https://www.ikea.com/my/en/images/products/antilop-highchair-with-tray-white__0339304_PE527619_S4.JPG'
     result = predict_model_chair(image_path=image_path, model=model, input_file=input_file)
 
     # for x,y in result:
     #     print(f'The {x} concept has a {y} probability of matching your input.')
 
     print(result)
-
     return  "pass"
     
     # if result != "":
