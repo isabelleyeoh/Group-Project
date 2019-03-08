@@ -2,7 +2,6 @@ from flask import Blueprint, render_template
 from ml_web.util.helper_clarifai import app_clarifai, predict_image_celebrity,predict_model_chair
 
 
-
 images_blueprint = Blueprint('images',
                             __name__,
                             template_folder='templates')

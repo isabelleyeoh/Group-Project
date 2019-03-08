@@ -2,7 +2,6 @@ from models.base_model import BaseModel
 import peewee as pw
 import re
 
-
 class Buyer(BaseModel):
     username = pw.CharField(unique=True)
     email = pw.CharField(unique=True)

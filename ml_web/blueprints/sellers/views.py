@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from models.image import Image
 
 
 sellers_blueprint = Blueprint('sellers',
@@ -46,3 +47,8 @@ def edit(id):
 @sellers_blueprint.route('/<id>', methods=['POST'])
 def update(id):
     pass
+
+@sellers_blueprint.route('/<int:id>', methods=['GET'])
+def product(id):
+    product = Image.get_by_id(id)
+    return render_template('sellers/product.html', product=product)
