@@ -17,9 +17,10 @@
   <script type="text/javascript" src="{{ ASSET_URL }}"></script>
   {% endassets %}
 
-  {% block header %}{% endblock %}
-  <title>{% block title %}{% endblock %}</title>
-</head>
+    {% block js %}
+    {% endblock %}
+  </body>
+</html>
 
 <body>
   {% block content %}
