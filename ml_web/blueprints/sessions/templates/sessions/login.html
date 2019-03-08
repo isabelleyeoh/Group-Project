@@ -1,0 +1,42 @@
+{% extends '_layout.html' %}
+
+{% block header %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+<div class='container'>
+    <div class='col-6 offset-3 jumbotron registration mt-4'>
+        <legend class='text-center'>
+            <h1>Sign In</h1>
+        </legend>
+        <button class = 'btn btn-info google form-group col-12'>Login via Google</button>
+        <button class = 'btn btn-info facebook form-group col-12'>Login via Facebook</button>
+
+        <div>OR</div>
+
+        <form action="{{ url_for('sessions.check') }}" method="POST">
+            <!--=======EMAIL ADDRESS =======-->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Email address" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <!--=======PASSWORD =======-->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
+                </div>
+                <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <!--=======SUBMIT =======-->
+            <button class='btn btn-primary col-12 form-group'>Sign In</button>
+            <p class='text-center'>Don't have an accont? <a href="#">Sign Up</a></p>
+        </form>
+
+    </div>	
+</div>
+{% endblock %}

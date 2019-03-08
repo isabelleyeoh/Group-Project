@@ -1,5 +1,7 @@
 from models.base_model import BaseModel
+from models.buyer import Buyer
 import peewee as pw
+import re
 
 class Seller(BaseModel):
     username = pw.CharField(unique=True)
@@ -7,7 +9,7 @@ class Seller(BaseModel):
     password = pw.CharField()
 
     def validate(self):
-        duplicate_users = Seller.get_or_none(Buyer.email == self.email)
+        duplicate_users = Seller.get_or_none(Seller.email == self.email)
 
         validate_email = re.compile('[^@]+@[^@]+\.[^@]+')
 

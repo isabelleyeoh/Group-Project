@@ -6,4 +6,6 @@
 {% endblock %}
 {% block content %}
 <h1>Homepage</h1>
+<a href="{{ url_for('sessions.new', usertype='buyer') }}"><button>Buyer</button></a>
+<a href="{{ url_for('sessions.new', usertype='seller') }}"><button>Seller</button></a>
 {% endblock %}

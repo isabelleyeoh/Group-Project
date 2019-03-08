@@ -1,5 +1,5 @@
 from app import app
-from flask import Flask, render_template, blueprints
+from flask import Flask, render_template, blueprints, url_for
 from flask_assets import Environment, Bundle
 from ml_web.util.assets import bundles
 import os
