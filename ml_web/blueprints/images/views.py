@@ -41,13 +41,15 @@ def update(id):
 # Custom Model - predict chair type with input of local file
 @images_blueprint.route('/predict_chair', methods=['GET'])
 def predict_chair():
+
     input_file=False #True if using local path. False if using URL
     model='Next_Academy_Project'
-    image_path='https://ii.worldmarket.com/fcgi-bin/iipsrv.fcgi?FIF=/images/worldmarket/source/42812_XXX_v1.tif&wid=650&cvt=jpeg'
-    result = predict_model_chair(image_path=image_path, model=model, input_file=input_file)
+    workflow_id="Furniture-1"
+    image_path='http://www.hobbycraft.co.uk/supplyimages/636896_1000_1_800.jpg'
+    result = predict_model_chair(image_path=image_path, model=model, input_file=input_file, workflow_id=workflow_id)
 
-    # for x,y in result:
-    #     print(f'The {x} concept has a {y} probability of matching your input.')
+    for x,y in result:
+        print(f'The {x} concept has a {y} probability of matching your input.')
 
     print(result)
 
