@@ -43,7 +43,7 @@ def update(id):
 def predict_chair():
     input_file=False #True if using local path. False if using URL
     model='Next_Academy_Project'
-    image_path='https://www.ikea.com/gb/en/images/products/jokkmokk-chair-antique-stain__0475400_pe615581_s4.jpg'
+    image_path='https://ii.worldmarket.com/fcgi-bin/iipsrv.fcgi?FIF=/images/worldmarket/source/42812_XXX_v1.tif&wid=650&cvt=jpeg'
     result = predict_model_chair(image_path=image_path, model=model, input_file=input_file)
 
     # for x,y in result:
