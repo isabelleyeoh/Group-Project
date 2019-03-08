@@ -42,7 +42,7 @@ def show(username):
 
 @buyers_blueprint.route('/', methods=["GET"])
 def index():
-    return "buyers"
+    return render_template('buyers/buyer.html')
 
 
 @buyers_blueprint.route('/<id>/edit', methods=['GET'])
