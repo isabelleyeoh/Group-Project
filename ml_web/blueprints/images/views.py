@@ -55,7 +55,7 @@ def predict_celebrity():
 def predict_chair():
     input_file=True #True if using local path. False if using URL
     model='Next_Academy_Project'
-    image_path='/Users/jianming/Desktop/Herman_Miller_Test.jpeg'
+    image_path='/Users/jianming/Desktop/Malmo_Negative_3.jpg'
     result = predict_model_chair(image_path=image_path, model=model, input_file=input_file)
 
     for x,y in result:
