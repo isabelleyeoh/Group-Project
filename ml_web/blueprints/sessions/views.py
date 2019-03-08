@@ -14,8 +14,15 @@ sessions_blueprint = Blueprint('sessions',
                             template_folder='templates')
 
 
+# @sessions_blueprint.route('/new', methods=['GET'])
+# def new():
+#     return render_template('sessions/option.html')
+
+
 @sessions_blueprint.route('/new/<usertype>', methods=['GET'])
-def new(usertype):
+def new(usertype):        
+    # if request.method == 'GET':
+    #     usertype = request.form['usertype']
     return render_template('sessions/new.html', usertype=usertype)
 
 
@@ -48,7 +55,6 @@ def login():
 
 @sessions_blueprint.route('/check', methods=['POST'])
 def check():
-
     email_to_check = request.form['email']
     password_to_check = request.form['password']
     buyer = Buyer.get_or_none(Buyer.email == email_to_check)

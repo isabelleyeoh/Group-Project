@@ -55,7 +55,7 @@
             <!--=======EMAIL ADDRESS =======-->
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
+                    <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
                 </div>
                 <input type="text" name='email' class="form-control" placeholder="Email address" aria-label="Username" aria-describedby="basic-addon1">
             </div>
@@ -63,17 +63,19 @@
             <!--=======PASSWORD =======-->
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
                 </div>
                 <input type="password" name='password' class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
             </div>
 
             <!--=======SUBMIT =======-->
-            <button class='btn btn-primary col-12 form-group'>Sign In</button>
-            <p class='text-center'>Don't have an accont? <a href="#">Sign Up</a></p>
+
+            <button class='btn btn-primary col-12 form-group'>SignIn</button>
+            <p class='text-center'>Don't have an accont? <a href="{{ url_for('sessions.new', usertype=usertype) }}">Sign
+                    Up</a></p>
         </form>
 
-    </div>	
+    </div>
 </div>
 
 <script>

@@ -2,101 +2,103 @@
 
 
 {% block header %}
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+  integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 {% endblock %}
 
 {% block content %}
 <div class='container'>
-    <div class='col-6 offset-3 jumbotron registration mt-4'>
-        <legend class='text-center'>
-            <h1>Create Account</h1>
-            <p>Get started with your free account</p>
-        </legend>
-        
+  <div class='col-6 offset-3 jumbotron registration mt-4'>
+    <legend class='text-center'>
+      <h1>Create Account</h1>
+      <p>Get started with your free account</p>
+    </legend>
 
-        <form action="{{ url_for('sessions.create') }}" method="POST">
-          <input type="hidden" value="{{csrf_token()}}" name='csrf_token'>    
-            <!--=======BUYER SELLER =======-->
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-md"></i></span>
-            </div>
-            {% if usertype == 'buyer' %}
-            <select class="custom-select" id="userType" name='userType'>
-              <option selected>Choose...</option>
-              <option selected value="1">Buyer</option>
-              <option value="2">Seller</option>
-            </select>
-            {% elif usertype == 'seller' %}
-            <select class="custom-select" id="userType" name='userType'>
-              <option selected>Choose...</option>
-              <option value="1">Buyer</option>
-              <option selected value="2">Seller</option>
-            </select>
-            {% endif %}
+
+    <form action="{{ url_for('sessions.create', usertype=usertype) }}" method="POST">
+      <!--=======BUYER SELLER =======-->
+      <input type="hidden" value="{{csrf_token()}}" name='csrf_token' />
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-md"></i></span>
+        </div>
+        {% if usertype == 'buyer' %}
+        <select class="custom-select" id="userType">
+          <option selected>Choose...</option>
+          <option selected value="1">Buyer</option>
+          <option value="2">Seller</option>
+        </select>
+        <input type="hidden" name="userType" value="1" />
+        {% elif usertype == 'seller' %}
+        <select class="custom-select" id="userType">
+          <option selected>Choose...</option>
+          <option value="1">Buyer</option>
+          <option selected value="2">Seller</option>
+        </select>
+        {% endif %}
+      </div>
+
+      <div id='dynamic-form'>
+        {% if usertype == 'buyer' %}
+        <!-- =====FULLNAME===== -->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span>
           </div>
-          
-          <div id='dynamic-form'>
-            {% if usertype == 'buyer' %}
-            <!-- =====FULLNAME===== -->
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span>
-              </div>
-              <input type="text" class="form-control" placeholder="Buyer Full name" name="username">
-            </div>
-            <!-- =====EMAIL===== -->
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
-                </div>
-                <input type="text" class="form-control" placeholder="Buyer Email address" name="email">
-            </div>
-            <!-- =====PASSWORD===== -->
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
-              </div>
-              <input type="password" class="form-control" placeholder="Buyer Password" name="password">
-            </div>
-            <!-- =====BUTTON===== -->
-            <button class="btn btn-primary col-12 form-group">Create Account</button>
-            <p class="text-center">Have an Account? <a href="#">Log In</a></p>
-
-            {% elif usertype == 'seller' %}
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span>
-                </div>
-                <input type="text" class="form-control" placeholder="Seller Full name" name="username">
-              </div>
-              <!-- =====EMAIL===== -->
-              <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Seller Email address" name="email">
-              </div>
-              <!-- =====PASSWORD===== -->
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
-                </div>
-                <input type="password" class="form-control" placeholder="Seller Password" name="password">
-              </div>
-              <!-- =====BUTTON===== -->
-              <button class="btn btn-primary col-12 form-group">Create Account</button>
-              <p class="text-center">Have an Account? <a href="#">Log In</a></p>
-              {% endif %}
-
+          <input type="text" class="form-control" placeholder="Full name" name="username">
+        </div>
+        <!-- =====EMAIL===== -->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
           </div>
-        </form>
+          <input type="text" class="form-control" placeholder="Email address" name="email">
+        </div>
+        <!-- =====PASSWORD===== -->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
+          </div>
+          <input type="password" class="form-control" placeholder="Password" name="password">
+        </div>
+        <!-- =====BUTTON===== -->
+        <button class="btn btn-primary col-12 form-group">Create Account</button>
+        <p class="text-center">Have an Account? <a href="{{ url_for('sessions.login') }}">Log In</a></p>
 
-    </div>	
+        {% elif usertype == 'seller' %}
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span>
+          </div>
+          <input type="text" class="form-control" placeholder="Full name" name="username">
+        </div>
+        <!-- =====EMAIL===== -->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
+          </div>
+          <input type="text" class="form-control" placeholder="Email address" name="email">
+        </div>
+        <!-- =====PASSWORD===== -->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
+          </div>
+          <input type="password" class="form-control" placeholder="Password" name="password">
+        </div>
+        <!-- =====BUTTON===== -->
+        <button class="btn btn-primary col-12 form-group">Create Account</button>
+        <p class="text-center">Have an Account? <a href="{{ url_for('sessions.login') }}">Log In</a></p>
+        {% endif %}
+
+      </div>
+    </form>
+
+  </div>
 </div>
 <script>
-  $(document).ready(function() {
-    $('#userType').on('change', function() {
+  $(document).ready(function () {
+    $('#userType').on('change', function () {
       if ($('#userType').val() == 1) {
 
         let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Buyer Full name" name="username"></div>'
@@ -104,7 +106,7 @@
         let email = '<div class="input-group mb-3">\
           <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Buyer Email address" name="email"></div>'
 
-        let password='<div class="input-group mb-3">\
+        let password = '<div class="input-group mb-3">\
             <div class="input-group-prepend">\
             <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>\
             </div>\
@@ -112,18 +114,18 @@
             </div>'
 
         let button = '<button class="btn btn-primary col-12 form-group">Create Account</button>\
-        <p class="text-center">Have an Account? <a href="#">Log In</a></p>'
+        <p class="text-center">Have an Account? <a href="{{ url_for('sessions.login') }}">Log In</a></p>'
 
-        $('#dynamic-form').html(fullname + email + password + button) 
+        $('#dynamic-form').html(fullname + email + password + button)
 
-      }else if($('#userType').val() == 2) {
+      } else if ($('#userType').val() == 2) {
 
         let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Seller Full name" name="username"></div>'
 
         let email = '<div class="input-group mb-3">\
           <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Seller Email address" name="email"></div>'
 
-        let password='<div class="input-group mb-3">\
+        let password = '<div class="input-group mb-3">\
             <div class="input-group-prepend">\
             <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>\
             </div>\
@@ -131,11 +133,11 @@
             </div>'
 
         let button = '<button class="btn btn-primary col-12 form-group">Create Account</button>\
-          <p class="text-center">Have an Account? <a href="#">Log In</a></p>'
+          <p class="text-center">Have an Account? <a href="{{ url_for('sessions.login') }}">Log In</a></p>'
 
         $('#dynamic-form').html(fullname + email + password + button)
 
-      }else {
+      } else {
         $('#dynamic-form').html('')
       }
     });
