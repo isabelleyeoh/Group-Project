@@ -9,6 +9,7 @@ from werkzeug import secure_filename
 from app import app
 
 
+
 images_blueprint = Blueprint('images',
                             __name__,
                             template_folder='templates')
@@ -76,15 +77,16 @@ def image_upload():
 
         breakpoint()
 
-        input_file=False #True if using local path. False if using URL
+        input_file=True #True if using local path. False if using URL
         model='Next_Academy_Project'
         workflow_id="Furniture-1"
-        image_path=image_url
+        # image_path=image_url #Get image url from AWS S3
+        image_path="/Users/jianming/Desktop/Next_Academy_Python/Test_Photos/Group_Project/Concept_Ikea_Marius_Stool/Marius_Test_3.jpg"
         result = model_prediction(image_path=image_path, model=model, input_file=input_file, workflow_id=workflow_id)
 
         breakpoint()
         # Query the predicted concept and return the concept name
-        query = Product.get_or_none(Product.concept==result[1][0][0])
+        query = Product.get_or_none(Product.concept==result[0][0])
 
         # Return search result
         if query:
