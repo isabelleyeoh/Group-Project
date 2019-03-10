@@ -25,22 +25,22 @@ def model_prediction(image_path, model,input_file, workflow_id):
     result_gen_model = []
 
     for concept in response_data['results'][0]['outputs'][1]['data']['concepts']:
-        if concept['value']>0.90: 
+        if concept['value']>0: 
             val = (concept['name'],concept['value'])
             result_cust_model.append(val)
         else:
             pass
     
-    for concept in response_data['results'][0]['outputs'][0]['data']['concepts']:
-        if concept['value']>0.90: 
-            val = (concept['name'],concept['value'])
-            result_gen_model.append(val)
-        else:
-            pass
+    # for concept in response_data['results'][0]['outputs'][0]['data']['concepts']:
+    #     if concept['value']>0.90: 
+    #         val = (concept['name'],concept['value'])
+    #         result_gen_model.append(val)
+    #     else:
+    #         pass
     
     breakpoint()
 
-    return result_gen_model,result_cust_model
+    return result_cust_model
 
 
 
