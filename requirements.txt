@@ -1,5 +1,8 @@
 asn1crypto==0.24.0
 Authlib==0.10
+autopep8==1.4.3
+boto3==1.9.111
+botocore==1.12.111
 certifi==2018.11.29
 cffi==1.12.2
 chardet==3.0.4
@@ -9,6 +12,7 @@ colorama==0.4.1
 configparser==3.7.3
 cryptography==2.6.1
 cssmin==0.2.0
+docutils==0.14
 Flask==1.0.2
 Flask-Assets==0.12
 Flask-Cors==3.0.7
@@ -20,6 +24,7 @@ grpcio==1.19.0
 idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.10
+jmespath==0.9.4
 jsmin==2.2.2
 jsonschema==2.6.0
 MarkupSafe==1.1.1
@@ -27,9 +32,12 @@ peewee==3.8.2
 peewee-db-evolve==3.7.0
 protobuf==3.7.0
 psycopg2-binary==2.7.7
+pycodestyle==2.5.0
 pycparser==2.19
+python-dateutil==2.8.0
 python-dotenv==0.10.1
 requests==2.21.0
+s3transfer==0.2.0
 six==1.12.0
 urllib3==1.24.1
 webassets==0.12.1
