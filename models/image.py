@@ -10,5 +10,5 @@ class Image (BaseModel):
 	image_url = pw.CharField(unique=True)
 
 
-	
+
 	
