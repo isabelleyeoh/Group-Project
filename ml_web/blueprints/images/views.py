@@ -1,7 +1,12 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from ml_web.helpers.helper_clarifai import app_clarifai, model_prediction
 from models.image import Image
 from models.product import Product
+
+# JM added
+from ml_web.helpers.helper_aws import upload_file_to_s3, allowed_file
+from werkzeug import secure_filename
+from app import app
 
 
 images_blueprint = Blueprint('images',
@@ -39,28 +44,58 @@ def edit(id):
 def update(id):
     pass
 
+# *********JM TESTING UPLOAD OF IMAGE TO RUN THROUGH CLARIFAI **************#
 
-# Custom Model - predict chair type with input of local file
-@images_blueprint.route('/prediction_result', methods=['GET'])
-def prediction_result():
+@images_blueprint.route('/test_upload', methods=['GET'])
+def image_test():
 
-    input_file=True #True if using local path. False if using URL
-    model='Next_Academy_Project'
-    workflow_id="Furniture-1"
-    # image_path = request.form['image_url']
-    image_path='/Users/jianming/Desktop/Next_Academy_Python/Test_Photos/Group_Project/Concept_Ikea_Marius_Stool/Marius_Test_4.jpg'
-    result = model_prediction(image_path=image_path, model=model, input_file=input_file, workflow_id=workflow_id)
+    return render_template('images/test_upload.html')
 
-    breakpoint()
-    # Query the predicted concept and return the concept name
-    query = Product.get_or_none(Product.concept==result[1][0][0])
+@images_blueprint.route('/upload', methods=['POST'])
+def image_upload():
+ # A: Check if there is file in form
 
-    # Return search result
-    if query:
-        print(f'The object you have selected is the {query.name}. It has a price tag of RM{query.price}')
-        
+    if "search_image" not in request.files:
+        return "No user_file key in request.files"
+
+	# B
+    file    = request.files["search_image"]
+    # print(file)
+
+	# C.
+    if file.filename == "":
+        return "Please select a file"
+
+	# D.
+    if file and allowed_file(file.filename):
+
+        file.filename = secure_filename(file.filename)
+        output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
+
+        image_url=app.config['S3_LOCATION'] + file.filename
+
+        breakpoint()
+
+        input_file=False #True if using local path. False if using URL
+        model='Next_Academy_Project'
+        workflow_id="Furniture-1"
+        image_path=image_url
+        result = model_prediction(image_path=image_path, model=model, input_file=input_file, workflow_id=workflow_id)
+
+        breakpoint()
+        # Query the predicted concept and return the concept name
+        query = Product.get_or_none(Product.concept==result[1][0][0])
+
+        # Return search result
+        if query:
+            print(f'The object you have selected is the {query.name}. It has a price tag of RM{query.price}')
+            
+        else:
+            print('Sorry - your image does not return any results.')
+ 
+        # return redirect(url_for('users.edit',id=id))
+        return "PASS IMAGE"
+
     else:
-        print('Sorry - your image does not return any results.')
+        return render_template("home.html")
 
-    return  "pass"
-    
