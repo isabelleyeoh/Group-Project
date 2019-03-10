@@ -8,8 +8,8 @@ from flask import render_template, redirect, url_for
 app_clarifai=ClarifaiApp(api_key=app.config['CLARIFAI_API_KEY'])
 
 
-# Clarifai - predict chair
-def predict_model_chair(image_path, model,input_file, workflow_id):
+# Clarifai - predict model
+def model_prediction(image_path, model,input_file, workflow_id):
 
     # Add workflow
     workflow=Workflow(app_clarifai.api, workflow_id=workflow_id)
@@ -23,6 +23,8 @@ def predict_model_chair(image_path, model,input_file, workflow_id):
 
     result_cust_model=[]
     result_gen_model = []
+
+    breakpoint()
 
     for concept in response_data['results'][0]['outputs'][1]['data']['concepts']:
         if concept['value']>0.90: 
