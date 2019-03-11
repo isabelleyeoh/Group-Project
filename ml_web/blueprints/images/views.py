@@ -76,28 +76,29 @@ def image_upload():
 
         # Ensure correct orientation
         
-        img = PILImage.open(file)
+        img = PILImage.open(file) #Create a Pillow file object
+        breakpoint()
         if hasattr(img, '_getexif'):
             exifdata = img._getexif()
             try:
                 orientation = exifdata.get(274)
-                img = img.rotate(-90)
+                if orientation:  
+                    img = img.rotate(-90)
+                else:
+                    pass
             except:
                 pass
                 # orientation = 1
-    
         
-
         fs = BytesIO()
         # Save image with Pillow into FileStorage object.
         img.save(fs, format='JPEG')
 
-        # breakpoint()
         file.filename = secure_filename(file.filename)
         
         output = upload_file_to_s3(fs, file.filename, app.config["S3_BUCKET"], file.mimetype)
         image_url=output
-
+        breakpoint()
         # Run image through Clarifai
 
         input_file=False #True if using local path. False if using URL
