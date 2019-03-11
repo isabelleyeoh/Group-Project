@@ -17,26 +17,18 @@ aws_secret_access_key=app.config['S3_SECRET']
 
 
 
-def upload_file_to_s3(file, bucket_name, acl="public-read"):
+def upload_file_to_s3(file, key, bucket_name, content_type):
     
     try:
 
-        s3.upload_fileobj(
-            file,
-            bucket_name,
-            file.filename,
-            ExtraArgs={
-                "ACL": acl,
-                "ContentType": file.content_type
-            }
-        )
+        s3.put_object(ACL='public-read',Body=file.getvalue(),Key=key,Bucket=bucket_name, ContentType= content_type)
 
     except Exception as e:
         # This is a catch all exception, edit this part to fit your needs.
         print("Something Happened: ", e)
         return e
 
-    return f'{app.config["S3_LOCATION"]}{file.filename}'
+    return f'{app.config["S3_LOCATION"]}{key}'
 
 
 def allowed_file(filename):

@@ -5,8 +5,12 @@ from models.product import Product
 
 # JM added
 from ml_web.helpers.helper_aws import upload_file_to_s3, allowed_file
+from ml_web.helpers.helper_rotate import image_rotate
 from werkzeug import secure_filename
 from app import app
+
+from PIL import Image as PILImage
+from io import BytesIO
 
 
 
@@ -54,8 +58,8 @@ def image_test():
 
 @images_blueprint.route('/upload', methods=['POST'])
 def image_upload():
- # A: Check if there is file in form
-
+    # A: Check if there is file in form
+    
     if "search_image" not in request.files:
         return "No user_file key in request.files"
 
@@ -70,34 +74,53 @@ def image_upload():
 	# D.
     if file and allowed_file(file.filename):
 
+        # Ensure correct orientation
+        
+        img = PILImage.open(file)
+        if hasattr(img, '_getexif'):
+            exifdata = img._getexif()
+            try:
+                orientation = exifdata.get(274)
+                img = img.rotate(-90)
+            except:
+                pass
+                # orientation = 1
+    
+        
+
+        fs = BytesIO()
+        # Save image with Pillow into FileStorage object.
+        img.save(fs, format='JPEG')
+
+        # breakpoint()
         file.filename = secure_filename(file.filename)
-        output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
+        
+        output = upload_file_to_s3(fs, file.filename, app.config["S3_BUCKET"], file.mimetype)
+        image_url=output
 
-        image_url=app.config['S3_LOCATION'] + file.filename
+        # Run image through Clarifai
 
-        breakpoint()
-
-        input_file=True #True if using local path. False if using URL
+        input_file=False #True if using local path. False if using URL
         model='Next_Academy_Project'
         workflow_id="Furniture-1"
-        # image_path=image_url #Get image url from AWS S3
-        image_path="/Users/jianming/Desktop/Next_Academy_Python/Test_Photos/Group_Project/Concept_Ikea_Marius_Stool/Marius_Test_3.jpg"
+        image_path=image_url #Get image url from AWS S3
         result = model_prediction(image_path=image_path, model=model, input_file=input_file, workflow_id=workflow_id)
+       
+        # Query the predicted concept and return the concept name or maximum probabilty?
+        try:
+            query = Product.get_or_none(Product.concept==result[0])
 
-        breakpoint()
-        # Query the predicted concept and return the concept name
-        query = Product.get_or_none(Product.concept==result[0][0])
-
-        # Return search result
-        if query:
-            print(f'The object you have selected is the {query.name}. It has a price tag of RM{query.price}')
+            if query:
+                return (f'The object you have selected is the {query.name}. It has a price tag of RM{query.price}')
+                
+            else:
             
-        else:
-            print('Sorry - your image does not return any results.')
- 
-        # return redirect(url_for('users.edit',id=id))
-        return "PASS IMAGE"
+                return "Sorry - your image does not return any results."
 
-    else:
-        return render_template("home.html")
+        except:
+
+            return render_template("home.html")
+
+
+        
 

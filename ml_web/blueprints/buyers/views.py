@@ -13,7 +13,7 @@ buyers_blueprint = Blueprint('buyers',
 
 @buyers_blueprint.route('/new', methods=['GET'])
 def new():
-    return render_template('buyers/new.html')
+    return render_template('buyers/buyer.html')
 
 
 @buyers_blueprint.route('/', methods=['POST'])
@@ -32,8 +32,6 @@ def create():
         return redirect(url_for('buyers.index'))
     else:
         return render_template('buyers/new.html', username=request.form['username'], email=request.form['email'], password=request.form['password'], errors=buyer.errors)
-
-
 
 @buyers_blueprint.route('/<username>', methods=["GET"])
 def show(username):

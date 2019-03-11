@@ -52,3 +52,4 @@ def update(id):
 def product(id):
     product = Image.get_by_id(id)
     return render_template('sellers/product.html', product=product)
+
