@@ -15,7 +15,7 @@ def model_prediction(image_path, model,input_file, workflow_id):
     workflow=Workflow(app_clarifai.api, workflow_id=workflow_id)
 
     # See what image is being created
-    app_clarifai.inputs.create_image_from_url(url=image_path)
+    # app_clarifai.inputs.create_image_from_url(url=image_path)
 
     response_data = workflow.predict_by_url(url=image_path)
 
@@ -30,8 +30,7 @@ def model_prediction(image_path, model,input_file, workflow_id):
         else:
             pass
 
-    breakpoint()
-
+    print(result_cust_model)
     result_cust = list(map(max, zip(*result_cust_model)))
     
     return result_cust
