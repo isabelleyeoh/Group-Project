@@ -5,7 +5,6 @@ from models.product import Product
 
 # JM added
 from ml_web.helpers.helper_aws import upload_file_to_s3, allowed_file
-from ml_web.helpers.helper_rotate import image_rotate
 from werkzeug import secure_filename
 from app import app
 
@@ -27,6 +26,7 @@ def new():
 
 @images_blueprint.route('/', methods=['POST'])
 def create():
+    
     pass
 
 
@@ -37,7 +37,7 @@ def show(username):
 
 @images_blueprint.route('/', methods=["GET"])
 def index():
-    return "images"
+    pass
 
 
 @images_blueprint.route('/<id>/edit', methods=['GET'])
@@ -77,12 +77,13 @@ def image_upload():
         # Ensure correct orientation
         
         img = PILImage.open(file) #Create a Pillow file object
-        breakpoint()
+        # breakpoint()
         if hasattr(img, '_getexif'):
             exifdata = img._getexif()
             try:
                 orientation = exifdata.get(274)
-                if orientation:  
+                print(orientation)
+                if orientation==6:  
                     img = img.rotate(-90)
                 else:
                     pass
@@ -98,7 +99,7 @@ def image_upload():
         
         output = upload_file_to_s3(fs, file.filename, app.config["S3_BUCKET"], file.mimetype)
         image_url=output
-        breakpoint()
+        
         # Run image through Clarifai
 
         input_file=False #True if using local path. False if using URL
@@ -107,20 +108,22 @@ def image_upload():
         image_path=image_url #Get image url from AWS S3
         result = model_prediction(image_path=image_path, model=model, input_file=input_file, workflow_id=workflow_id)
        
-        # Query the predicted concept and return the concept name or maximum probabilty?
-        try:
-            query = Product.get_or_none(Product.concept==result[0])
+        # Query: Check if highest probability custom concept matches database
 
-            if query:
-                return (f'The object you have selected is the {query.name}. It has a price tag of RM{query.price}')
-                
-            else:
-            
-                return "Sorry - your image does not return any results."
-
+        try:   
+            query_cust = Product.get_or_none(Product.concept==result[0][0][0])
+            product_name=query_cust.name
         except:
+            product_name=result[0][0]
 
-            return render_template("home.html")
+        # Check: Whether exact match or none
+
+        if result[0][0][1]>0.70:
+            match = True
+        else:
+            match = False
+
+        return render_template("images/test_result.html", cust_result_list=result[0], gen_result_list=result[1],file_name=file.filename, match = match, product_name=product_name,search_image=image_url)
 
 
         
