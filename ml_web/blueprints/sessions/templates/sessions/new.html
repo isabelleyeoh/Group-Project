@@ -16,28 +16,7 @@
 
 
     <form action="{{ url_for('sessions.create', usertype=usertype) }}" method="POST">
-      <!--=======BUYER SELLER =======-->
       <input type="hidden" value="{{csrf_token()}}" name='csrf_token' />
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-md"></i></span>
-        </div>
-        {% if usertype == 'buyer' %}
-        <select class="custom-select" id="userType">
-          <option selected>Choose...</option>
-          <option selected value="1">Buyer</option>
-          <option value="2">Seller</option>
-        </select>
-        <input type="hidden" name="userType" value="1" />
-        {% elif usertype == 'seller' %}
-        <select class="custom-select" id="userType">
-          <option selected>Choose...</option>
-          <option value="1">Buyer</option>
-          <option selected value="2">Seller</option>
-        </select>
-        {% endif %}
-      </div>
-
       <div id='dynamic-form'>
         {% if usertype == 'buyer' %}
         <!-- =====FULLNAME===== -->
@@ -96,54 +75,5 @@
 
   </div>
 </div>
-<script>
-  $(document).ready(function () {
-    $('#userType').on('change', function () {
-      if ($('#userType').val() == 1) {
 
-        let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Buyer Full name" name="username"></div>'
-
-        let email = '<div class="input-group mb-3">\
-          <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Buyer Email address" name="email"></div>'
-
-        let password = '<div class="input-group mb-3">\
-            <div class="input-group-prepend">\
-            <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>\
-            </div>\
-            <input type="password" class="form-control" placeholder="Buyer Password" name="password">\
-            </div>'
-
-        let button = '<button class="btn btn-primary col-12 form-group">Create Account</button>\
-        <p class="text-center">Have an Account? <a href="{{ url_for('sessions.login') }}">Log In</a></p>'
-
-        $('#dynamic-form').html(fullname + email + password + button)
-
-      } else if ($('#userType').val() == 2) {
-
-        let fullname = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-user-circle"></i></span></div><input type="text" class="form-control" placeholder="Seller Full name" name="username"></div>'
-
-        let email = '<div class="input-group mb-3">\
-          <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span></div><input type="text" class="form-control" placeholder="Seller Email address" name="email"></div>'
-
-        let password = '<div class="input-group mb-3">\
-            <div class="input-group-prepend">\
-            <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>\
-            </div>\
-            <input type="password" class="form-control" placeholder="Seller Password" name="password">\
-            </div>'
-
-        let button = '<button class="btn btn-primary col-12 form-group">Create Account</button>\
-          <p class="text-center">Have an Account? <a href="{{ url_for('sessions.login') }}">Log In</a></p>'
-
-        $('#dynamic-form').html(fullname + email + password + button)
-
-      } else {
-        $('#dynamic-form').html('')
-      }
-    });
-  });
-
-
-
-</script>
 {% endblock %}

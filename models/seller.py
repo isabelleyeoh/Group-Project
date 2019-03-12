@@ -4,10 +4,14 @@ import peewee as pw
 import re
 from flask_login import UserMixin
 
-class Seller(BaseModel, UserMixin):
+class Seller(BaseModel):
+    name = pw.CharField(null=True)
     username = pw.CharField(unique=True)
     email = pw.CharField(unique=True)
     password = pw.CharField()
+
+    def is_active(self):
+        return True
 
     def validate(self):
         duplicate_users = Seller.get_or_none(Seller.email == self.email)

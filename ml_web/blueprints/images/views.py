@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request
-from ml_web.helpers.helper_clarifai import app_clarifai, model_prediction
+from flask import Blueprint, render_template, redirect, url_for
+# from ml_web.util.helper_clarifai import app_clarifai, predict_model_chair
 from models.image import Image
 from models.product import Product
 
@@ -51,14 +51,18 @@ def update(id):
 
 # *********JM TESTING UPLOAD OF IMAGE TO RUN THROUGH CLARIFAI **************#
 
-@images_blueprint.route('/test_upload', methods=['GET'])
-def image_test():
+# Custom Model - predict chair type with input of local file
+# @images_blueprint.route('/predict_chair', methods=['GET'])
+# def predict_chair():
+#     input_file=False #True if using local path. False if using URL
+#     model='Next_Academy_Project'
+#     image_path='https://www.ikea.com/my/en/images/products/stig-bar-stool-with-backrest-black__0438266_PE591356_S4.JPG'
+#     result = predict_model_chair(image_path=image_path, model=model, input_file=input_file)
 
     return render_template('images/test_upload.html')
 
-@images_blueprint.route('/upload', methods=['POST'])
-def image_upload():
-    # A: Check if there is file in form
+    # print(result)
+    # return  "pass"
     
     if "search_image" not in request.files:
         return "No user_file key in request.files"

@@ -70,12 +70,18 @@
 
             <!--=======SUBMIT =======-->
 
-            <button class='btn btn-primary col-12 form-group'>SignIn</button>
+
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /><br>
+            <button type='submit' class='btn btn-primary col-12 form-group'>SignIn</button>
             <p class='text-center'>Don't have an accont? <a href="{{ url_for('sessions.new', usertype=usertype) }}">Sign
                     Up</a></p>
         </form>
 
+
+
+
     </div>
+
 </div>
 
 <script>

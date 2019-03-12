@@ -4,11 +4,13 @@ from models.seller import Seller
 
 
 class Product (BaseModel):
-    seller_id = pw.ForeignKeyField(Seller, backref='sellers')
-    name = pw.CharField(unique=True)
-    image_url = pw.CharField(unique=True)
-    category=pw.CharField()
-    price = pw.CharField()
-    description = pw.CharField()
-    concept=pw.CharField()
+	name = pw.CharField(unique=True)
+	description = pw.CharField()
+	category = pw.CharField()
+	price = pw.CharField()
+	product_url = pw.CharField()
+	custom_concept = pw.CharField()
+	seller_id = pw.ForeignKeyField(Seller, backref='sellers')
 
+	
+	

@@ -23,7 +23,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
-    return Buyer.get_or_none(id=user_id)
+    return Buyer.get_or_none(id=user_id) or Seller.get_or_none(id=user_id)
 
 # @login_manager.user_loader
 # def load_user(user_id):
