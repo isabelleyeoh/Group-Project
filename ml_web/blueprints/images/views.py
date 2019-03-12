@@ -127,8 +127,8 @@ def update(id):
         else:
             match = False
 
+        # Render: template showing product result
         return render_template("images/test_result.html", cust_result_list=result[0], gen_result_list=result[1],file_name=file.filename, match = match, product_name=product_name,search_image=image_url)
 
 
         
-
