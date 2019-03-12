@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template
-from ml_web.util.helper_clarifai import app_clarifai, predict_model_chair
+from flask import Blueprint, render_template, redirect, url_for
+# from ml_web.util.helper_clarifai import app_clarifai, predict_model_chair
 from models.image import Image
 
 images_blueprint = Blueprint('images',
@@ -39,18 +39,18 @@ def update(id):
 
 
 # Custom Model - predict chair type with input of local file
-@images_blueprint.route('/predict_chair', methods=['GET'])
-def predict_chair():
-    input_file=False #True if using local path. False if using URL
-    model='Next_Academy_Project'
-    image_path='https://www.ikea.com/my/en/images/products/antilop-highchair-with-tray-white__0339304_PE527619_S4.JPG'
-    result = predict_model_chair(image_path=image_path, model=model, input_file=input_file)
+# @images_blueprint.route('/predict_chair', methods=['GET'])
+# def predict_chair():
+#     input_file=False #True if using local path. False if using URL
+#     model='Next_Academy_Project'
+#     image_path='https://www.ikea.com/my/en/images/products/stig-bar-stool-with-backrest-black__0438266_PE591356_S4.JPG'
+#     result = predict_model_chair(image_path=image_path, model=model, input_file=input_file)
 
     # for x,y in result:
     #     print(f'The {x} concept has a {y} probability of matching your input.')
 
-    print(result)
-    return  "pass"
+    # print(result)
+    # return  "pass"
     
     # if result != "":
     #     for product_name, probability in result:

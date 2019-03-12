@@ -4,9 +4,13 @@ import peewee as pw
 import re
 
 class Seller(BaseModel):
+    name = pw.CharField(null=True)
     username = pw.CharField(unique=True)
     email = pw.CharField(unique=True)
     password = pw.CharField()
+
+    def is_active(self):
+        return True
 
     def validate(self):
         duplicate_users = Seller.get_or_none(Seller.email == self.email)

@@ -7,6 +7,10 @@ class Buyer(BaseModel):
     email = pw.CharField(unique=True)
     password = pw.CharField()
 
+    def is_active(self):
+        return True
+
+
     def validate(self):
         duplicate_users = Buyer.get_or_none(Buyer.email == self.email)
 

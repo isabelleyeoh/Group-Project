@@ -7,6 +7,8 @@ import config
 from ml_web.helpers.google_oauth import oauth
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from models.buyer import Buyer
+from models.seller import Seller
 
 
 oauth.init_app(app)
@@ -20,7 +22,8 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get_or_none(id=user_id)
+    return Buyer.get_or_none(id=user_id) or Seller.get_or_none(id=user_id)
+
 
 
 from ml_web.blueprints.buyers.views import buyers_blueprint

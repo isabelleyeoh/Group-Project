@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -9,19 +10,87 @@
 
   {% assets "home_css" %}
   <link rel="stylesheet" href="{{ ASSET_URL }}">
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="/ml_web/static/css/custom.css" rel="stylesheet">
   {% endassets %}
+
+
 
 
 
   {% assets "home_js" %}
   <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/homepage.js"></script>
+  <script>!function (e) { "use strict"; e('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () { if (location.pathname.replace(/^\//, "") == this.pathname.replace(/^\//, "") && location.hostname == this.hostname) { var a = e(this.hash); if ((a = a.length ? a : e("[name=" + this.hash.slice(1) + "]")).length) return e("html, body").animate({ scrollTop: a.offset().top - 70 }, 1e3, "easeInOutExpo"), !1 } }), e(".js-scroll-trigger").click(function () { e(".navbar-collapse").collapse("hide") }), e("body").scrollspy({ target: "#mainNav", offset: 100 }); var a = function () { 100 < e("#mainNav").offset().top ? e("#mainNav").addClass("navbar-shrink") : e("#mainNav").removeClass("navbar-shrink") }; a(), e(window).scroll(a) }(jQuery);</script>
+
   {% endassets %}
 
   {% block header %}{% endblock %}
+  <link rel="shortcut icon" type="image/png" href="../static/images/focus-center-lens-capture-camera-31911.png">
   <title>{% block title %}{% endblock %}</title>
 </head>
 
 <body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <img src="../static/images/focus-center-lens-capture-camera-31911.png" width="50" height="50"
+        class="d-inline-block align-top" alt="">
+      <a class="navbar-brand js-scroll-trigger" href="/">
+        SNAPSHOP
+      </a>
+      <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#howitworks">How It Works</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#inspiration">Inspiration</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#faq">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#contact">Contact</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btnsearch" type="submit">
+            <img src="../static/images/search-icon.png" width="35" height="28" alt="">
+          </button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ url_for('sessions.option') }}"><span class="glyphicon glyphicon-user"></span>
+              Sign Up</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" style='margin-left: 5px;'>
+          <li><a href="{{ url_for('sessions.login')}}"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
   {% block content %}
   {% endblock %}
 

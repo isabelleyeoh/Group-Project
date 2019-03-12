@@ -14,32 +14,39 @@ sessions_blueprint = Blueprint('sessions',
                             template_folder='templates')
 
 
-# @sessions_blueprint.route('/new', methods=['GET'])
-# def new():
-#     return render_template('sessions/option.html')
+@sessions_blueprint.route('/new', methods=['GET'])
+def option():
+    return render_template('sessions/option.html')
 
 
-@sessions_blueprint.route('/new/<usertype>', methods=['GET'])
-def new(usertype):        
-    # if request.method == 'GET':
-    #     usertype = request.form['usertype']
+@sessions_blueprint.route('/new/usertype', methods=['POST'])
+def new():        
+    usertype = request.form['usertype']
+    return redirect(url_for('sessions.usertype', usertype=usertype))
+
+
+@sessions_blueprint.route('/usertype/<usertype>', methods=['GET'])
+def usertype(usertype):        
     return render_template('sessions/new.html', usertype=usertype)
 
 
-@sessions_blueprint.route('/', methods=['POST'])
-def create():
-    userType = int(request.form['userType'])
+@sessions_blueprint.route('/<usertype>', methods=['POST'])
+def create(usertype):
+    # userType = int(request.form['userType'])
+    usertype = usertype
     username = request.form['username']
     email = request.form['email']
     password = request.form['password']
     hashed_password = generate_password_hash(password)
     
-    if userType == 1:
+    # if userType == 1:
+    if usertype == 'buyer':
         buyer = Buyer(username=username, email=email, password=hashed_password)
         buyer.save()
         return 'Buyer registered'
 
-    elif userType == 2:
+    # elif userType == 2:
+    if usertype == 'seller':
         seller = Seller(username=username, email=email, password=hashed_password)
         seller.save()
         return 'seller registered'
@@ -59,7 +66,7 @@ def check():
     result = check_password_hash(hashed_password, password_to_check)
 
     if result:
-        login_user(buyer) or login_user(seller)
+        login_user(user)
         return 'logged in'
     else:
         flash("Wrong password")
