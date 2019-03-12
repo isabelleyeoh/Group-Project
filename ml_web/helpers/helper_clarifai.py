@@ -21,8 +21,9 @@ def model_prediction(image_path, model,input_file, workflow_id):
 
     result_cust_model=[]
     result_gen_model = []
+    ref_list=['chair','table','sofa','armchair']
 
-    # Append and get  concept with highest probability - returns a list
+    # Custom Model: Append results and return a list
     for concept in response_data['results'][0]['outputs'][1]['data']['concepts']:
         if concept['value']>0: 
             val = (concept['name'],concept['value'])
@@ -30,10 +31,18 @@ def model_prediction(image_path, model,input_file, workflow_id):
         else:
             pass
 
-    print(result_cust_model)
-    result_cust = list(map(max, zip(*result_cust_model)))
+    # General Model:
+
+    for concept in response_data['results'][0]['outputs'][0]['data']['concepts']:
+        if concept['value']>0.80 and concept['name']in ref_list:
+
+            val = (concept['name'],concept['value'])
+            result_gen_model.append(val)
+        else:
+            pass
+
     
-    return result_cust
+    return result_cust_model, result_gen_model
 
 
 

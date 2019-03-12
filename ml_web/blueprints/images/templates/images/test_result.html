@@ -1,0 +1,51 @@
+{% extends "_layout.html" %}
+{% block title %}
+
+{%endblock%}
+
+{% block content%}
+<h1>Result of prediction test for {{file_name}}</h1>
+
+
+<img src={{search_image}} style="width:300px; height:300px" alt="">
+
+{%if match==True%}
+    <p><strong>Yay! We have found your furniture soulmate! It is the {{product_name}}</strong></p>
+{%else%}
+    <p><strong>We could not find an exact model. But based on this very powerful machine learning algorithm, we think you're looking for a {{gen_result_list[0][0]}}</strong></p>
+    <p>The closest match is <strong>{{product_name}} </strong></p>
+{%endif%}
+
+
+<h3>Custom Model</h3>
+{%for x,y in cust_result_list%}
+
+    <div class="row">
+        <div class="col">
+            {{x}}
+        </div>
+        <div class="col">
+            {{y}}
+        </div>
+    </div>
+
+{%endfor%}
+
+<h3>General Model - [chair, table, sofa, armchair]</h3>
+{%for x,y in gen_result_list%}
+
+    <div class="row">
+        <div class="col">
+            {{x}}
+        </div>
+        <div class="col">
+            {{y}}
+        </div>
+    </div>
+
+{%endfor%}
+
+
+{%endblock%}
+
+
