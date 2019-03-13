@@ -78,6 +78,11 @@
           <img src="../static/images/search-icon.png" width="35" height="28" alt="">
         </form>
 
+        {% if current_user.seller %}
+        <a class="nav-link" href="{{ url_for('sellers.new') }}">Edit Product</a>
+        {% else %}
+        {% endif %}
+
         {% if current_user.is_authenticated %}
         <a class="nav-link" href="{{ url_for('sessions.logout') }}">Logout</a>
         {% else %}
