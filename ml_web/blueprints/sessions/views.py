@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models.base_model import db, BaseModel
-from models.buyer import Buyer
-from models.seller import Seller
+from models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
@@ -32,29 +31,25 @@ def usertype(usertype):
 
 @sessions_blueprint.route('/<usertype>', methods=['POST'])
 def create(usertype):
-    # userType = int(request.form['userType'])
+
     usertype = usertype
     username = request.form['username']
     email = request.form['email']
     password = request.form['password']
     hashed_password = generate_password_hash(password)
-    
-    # if userType == 1:
+
     if usertype == 'buyer':
-        buyer = Buyer(username=username, email=email, password=hashed_password)
-        buyer.save()
+        user = User(username=username, email=email, password=hashed_password)
+        user.save()
         flash("buyer registered")
-        user = buyer
         login_user(user)
         return render_template('home.html')
 
-    # elif userType == 2:
     if usertype == 'seller':
-        seller = Seller(username=username, email=email, password=hashed_password)
-        seller.save()
+        user = User(username=username, email=email, password=hashed_password, seller=True)
+        user.save()
         flash("seller registered")
-        user = seller
-        login_seller(seller)
+        login_user(user)
         return render_template('home.html')
 
 @sessions_blueprint.route('/login', methods=['GET'])
@@ -66,8 +61,9 @@ def login():
 def check():
     email_to_check = request.form['email']
     password_to_check = request.form['password']
-    buyer = Buyer.get_or_none(Buyer.email == email_to_check)
-    seller = Seller.get_or_none(Seller.email == email_to_check)
+    user = User.get_or_none(Buyer.email == email_to_check) 
+    hashed_password = user.password
+    result = check_password_hash(hashed_password, password_to_check)
 
     if result:
         login_user(user)
@@ -88,16 +84,11 @@ def authorize():
     token = oauth.google.authorize_access_token()
     email = oauth.google.get(
         'https://www.googleapis.com/oauth2/v2/userinfo').json()['email']
-    buyer = Buyer.get_or_none(Buyer.email == email)  
-    seller = Seller.get_or_none(Seller.email == email) 
+    user = User.get_or_none(User.email == email) 
 
-    if buyer:
-        login_user(buyer)
-        return 'buyer logged in'
-        
-    elif seller:
-        login_user(seller)
-        return 'seller logged in'
+    if user:
+        login_user(user)
+        return redirect(url_for('home'))
     else:
         flash('Authentication failed.')
         return redirect(url_for('sessions.login'))
