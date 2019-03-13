@@ -42,18 +42,20 @@ def create(usertype):
     # if userType == 1:
     if usertype == 'buyer':
         buyer = Buyer(username=username, email=email, password=hashed_password)
-        if buyer.save():
-            return 'buyer registered'
-        else:
-            return str(buyer.errors)
+        buyer.save()
+        flash("buyer registered")
+        user = buyer
+        login_user(user)
+        return render_template('home.html')
 
     # elif userType == 2:
     if usertype == 'seller':
         seller = Seller(username=username, email=email, password=hashed_password)
-        if seller.save():
-            return 'seller registered'
-        else:
-            return str(seller.errors)
+        seller.save()
+        flash("seller registered")
+        user = seller
+        login_seller(seller)
+        return render_template('home.html')
 
 @sessions_blueprint.route('/login', methods=['GET'])
 def login():
@@ -69,7 +71,7 @@ def check():
 
     if result:
         login_user(user)
-        return 'logged in'
+        return render_template('home.html')
     else:
         flash("Wrong password")
         return 'logged in failed'
@@ -98,12 +100,12 @@ def authorize():
         return 'seller logged in'
     else:
         flash('Authentication failed.')
-        return redirect(url_for('sessions.new'))
+        return redirect(url_for('sessions.login'))
 
 
-@sessions_blueprint.route('/signout')
-def signout():
+@sessions_blueprint.route('/logout')
+def logout():
     logout_user()
-    flash("Successfully signed out")
-    return redirect(url_for('sessions.new'))
+    flash("Successfully logged out")
+    return redirect(url_for('sessions.login'))
 

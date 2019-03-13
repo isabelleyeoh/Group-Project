@@ -4,7 +4,7 @@ import peewee as pw
 import re
 from flask_login import UserMixin
 
-class Seller(BaseModel):
+class Seller(BaseModel, UserMixin):
     name = pw.CharField(null=True)
     username = pw.CharField(unique=True)
     email = pw.CharField(unique=True)

@@ -9,7 +9,7 @@ sellers_blueprint = Blueprint('sellers',
 
 @sellers_blueprint.route('/new', methods=['GET'])
 def new():
-    return render_template('sellers/new.html')
+    return render_template('sellers/seller.html')
 
 
 @sellers_blueprint.route('/', methods=['POST'])
@@ -50,6 +50,5 @@ def update(id):
 
 @sellers_blueprint.route('/<int:id>', methods=['GET'])
 def product(id):
-    product = Image.get_by_id(id)
-    return render_template('sellers/product.html', product=product)
+    pass
 
