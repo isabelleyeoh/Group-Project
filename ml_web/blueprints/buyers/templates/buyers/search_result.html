@@ -18,7 +18,6 @@
       <div class="col-md-6">
         <h1>{{matching_products.name}}</h1>
 
-        <span class="label label-primary">Vintage</span>
         <span class="monospaced">Model No. 1960140180</span>
 
         <p class="description">
@@ -34,9 +33,7 @@
         <div class="row add-to-cart">
 
           <div class="col-md-6">
-            <button class="btn btn-lg btn-brand">
-              Buy online
-            </button>
+            <a href="{{matching_products.product_url}}"  class="btn btn-lg btn-brand" role="button">Buy Online</a>
           </div>
 
           <div class="col-md-6">
@@ -45,12 +42,6 @@
             </button>
           </div>
         </div><!-- end row -->
-
-        <div class="row more-product-images" style="margin:10px">
-          <img src="../../../../static/images/special_chair1.4.JPG" alt="" height="20%" width="20%" />
-          <img src="../../../../static/images/special chair1.1.JPG" alt="" height="20%" width="20%" />
-        </div>
-
 
       </div>
     </div>
@@ -70,6 +61,7 @@
       {%for product in similar_products%}
       <div class="col-lg-3">
         <h5>{{product.name}}</h5> 
+        <small>RM{{product.price}}</small>
           <a href="{{product.image_photo_url}}" data-toggle="lightbox">    
             <img alt="" height="80%" width="80%" src="{{product.image_photo_url}}" />
           </a>

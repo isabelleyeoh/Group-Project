@@ -12,9 +12,10 @@ class Product (BaseModel):
     image_url = pw.CharField(unique=True)
     category=pw.CharField()
     price = pw.CharField()
-    description = pw.CharField()
+    description = pw.TextField()
     concept=pw.CharField()  
     clarifai_id=pw.CharField(default="Yes")
+    product_url=pw.CharField(null=True)
 
 
  # Hybrid property
