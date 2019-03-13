@@ -51,18 +51,14 @@ def update(id):
 
 # *********JM TESTING UPLOAD OF IMAGE TO RUN THROUGH CLARIFAI **************#
 
-# Custom Model - predict chair type with input of local file
-# @images_blueprint.route('/predict_chair', methods=['GET'])
-# def predict_chair():
-#     input_file=False #True if using local path. False if using URL
-#     model='Next_Academy_Project'
-#     image_path='https://www.ikea.com/my/en/images/products/stig-bar-stool-with-backrest-black__0438266_PE591356_S4.JPG'
-#     result = predict_model_chair(image_path=image_path, model=model, input_file=input_file)
+@images_blueprint.route('/uploader', methods=['GET'])
+def image_uploader():
 
-    return render_template('images/test_upload.html')
+    return render_template('images/uploader.html')
 
-    # print(result)
-    # return  "pass"
+@images_blueprint.route('/search_result', methods=['POST'])
+def search_result():
+    # A: Check if there is file in form
     
     if "search_image" not in request.files:
         return "No user_file key in request.files"
@@ -81,7 +77,7 @@ def update(id):
         # Ensure correct orientation
         
         img = PILImage.open(file) #Create a Pillow file object
-        # breakpoint()
+
         if hasattr(img, '_getexif'):
             exifdata = img._getexif()
             try:
@@ -112,23 +108,28 @@ def update(id):
         image_path=image_url #Get image url from AWS S3
         result = model_prediction(image_path=image_path, model=model, input_file=input_file, workflow_id=workflow_id)
        
-        # Query: Check if highest probability custom concept matches database
+        # Define: Custom Model and General Model tuple list
 
-        try:   
-            query_cust = Product.get_or_none(Product.concept==result[0][0][0])
-            product_name=query_cust.name
-        except:
-            product_name=result[0][0]
+        cust_result_list=result[0]
+        gen_result_list=result[1]
 
         # Check: Whether exact match or none
 
-        if result[0][0][1]>0.70:
+        # breakpoint()
+        if cust_result_list[0][1]>0.70:
+            # Get matching model + recommended items
+            product_match = Product.get_or_none(Product.concept==cust_result_list[0][0])
+            category_match=Product.select().where(Product.category==product_match.category, Product.concept!=cust_result_list[0][0])
             match = True
+            
         else:
+            # Recomend items based on furniture type
+            product_match=""
+            category_match=Product.select().where(Product.category==gen_result_list[0][0])
             match = False
-
+        
         # Render: template showing product result
-        return render_template("images/test_result.html", cust_result_list=result[0], gen_result_list=result[1],file_name=file.filename, match = match, product_name=product_name,search_image=image_url)
+        return render_template("images/search_result.html", cust_result_list=cust_result_list, gen_result_list=gen_result_list,file_name=file.filename, match = match, product_match=product_match, category_match=category_match,search_image=image_url)
 
 
         

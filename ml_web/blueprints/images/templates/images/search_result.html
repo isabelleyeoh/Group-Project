@@ -1,0 +1,55 @@
+<!-- For testing purposes - this section to be put into Product Result template when ready -->
+{% extends "_layout.html" %}
+{% block title %}
+
+{%endblock%}
+
+{% block content%}
+<h1>Result of prediction test for {{file_name}}</h1>
+
+<img src={{search_image}} style="width:300px; height:300px" alt="">
+
+{%if match==True%}
+    <p><strong>Yay! We have found your furniture soulmate! It is the {{product_match.name}}</strong></p>
+    <a href="{{product_match.image_photo_url}}" data-toggle="lightbox">    
+        <img class="img-fluid img-thumbnail"  style="width:100px; height:100px" src="{{product_match.image_photo_url}}" />
+    </a> 
+{%else%}
+    <p><strong>We could not find an exact model. But based on this very powerful machine learning algorithm, we think you're looking for a {{category_match.category}}</strong></p>
+
+{%endif%}
+
+    <p>Perhaps you could consider these similar items:</p>
+
+    <div class="row">
+    {%for item in category_match%}
+    <div class="col-3">
+                <a href="{{item.image_photo_url}}" data-toggle="lightbox">    
+                        <img class="img-fluid img-thumbnail"  style="width:200px; height:200px" src="{{item.image_photo_url}}" />
+                </a>
+                <p>{{item.name}}</p>  
+        </div>
+    {%endfor%}
+    </div>
+
+   
+
+
+<h3>General Model - [chair, table, sofa, armchair]</h3>
+{%for x,y in gen_result_list%}
+
+    <div class="row">
+        <div class="col">
+            {{x}}
+        </div>
+        <div class="col">
+            {{y}}
+        </div>
+    </div>
+
+{%endfor%}
+
+
+{%endblock%}
+
+
