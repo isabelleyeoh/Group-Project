@@ -4,7 +4,7 @@
 
 
 
-<form action="{{url_for('images.search_result')}}" method="POST" enctype="multipart/form-data">
+<form action="{{url_for('buyers.index')}}" method="POST" enctype="multipart/form-data">
 
     <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
     <input type="file" name="search_image" >

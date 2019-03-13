@@ -108,28 +108,32 @@ def search_result():
         image_path=image_url #Get image url from AWS S3
         result = model_prediction(image_path=image_path, model=model, input_file=input_file, workflow_id=workflow_id)
        
-        # Define: Custom Model and General Model tuple list
+        # Define: Custom Model and Search Model tuple list
 
         cust_result_list=result[0]
-        gen_result_list=result[1]
+        search_result_list=result[1]
 
-        # Check: Whether exact match or none
-
-        # breakpoint()
+        # Check: Exact Product Match
         if cust_result_list[0][1]>0.70:
             # Get matching model + recommended items
-            product_match = Product.get_or_none(Product.concept==cust_result_list[0][0])
-            category_match=Product.select().where(Product.category==product_match.category, Product.concept!=cust_result_list[0][0])
+            matching_products = Product.get_or_none(Product.concept==cust_result_list[0][0])
+            search_result_list=search_result_list[:5]
+            # Check: Top 3 similar Products but omit matching model
+            similar_products= Product.select().where(Product.clarifai_id << search_result_list, Product.clarifai_id!=matching_products.clarifai_id)
             match = True
             
         else:
             # Recomend items based on furniture type
-            product_match=""
-            category_match=Product.select().where(Product.category==gen_result_list[0][0])
+            matching_products=""
+            search_result_list=search_result_list[:4]
+            # Check: Top 3 similar Products but omit matching model
+            similar_products= Product.select().where(Product.clarifai_id << search_result_list)
+
             match = False
-        
+
+
         # Render: template showing product result
-        return render_template("images/search_result.html", cust_result_list=cust_result_list, gen_result_list=gen_result_list,file_name=file.filename, match = match, product_match=product_match, category_match=category_match,search_image=image_url)
+        return render_template("images/buyer.html", cust_result_list=cust_result_list,file_name=file.filename, match = match, matching_products=matching_products,similar_products=similar_products,search_image=image_url)
 
 
         
