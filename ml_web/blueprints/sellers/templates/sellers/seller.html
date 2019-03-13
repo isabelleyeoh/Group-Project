@@ -1,242 +1,149 @@
 {% extends "_layout.html" %}
 {% block title %}
-  Homepage
+seller
 {% endblock %}
 {% block header %}
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<link href="/ml_web/static/css/seller_custom.css" rel="stylesheet">
-
 {% endblock %}
-
 {% block content %}
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger" a href="{{ url_for('home')}}">Project</a>
-      <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#">Techonologies</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#Projects">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#signup">Logout</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</div>
-</nav>
 
+<div class="container-fluid">
+  <div class="container">
+    <h2>Product Details</h2>
+    <form action="{{ url_for('images.create') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+      <input type="hidden" name="csrf_token" value="{{csrf_token()}}" /><br>
 
-<div class="container">
-    <div class="row">
-          <div class="col-xs-12 col-sm-9">
-            
-            <!-- User profile -->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-              <h4 class="panel-title">User profile</h4>
-              </div>
-              <div class="panel-body">
-                <div class="profile__avatar">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="...">
-                </div>
-                <div class="profile__header">
-                  <h4>Richard Roe <small>Administrator</small></h4>
-                  <p class="text-muted">
-                    hello everyone
-                  </p>
-                  
-                </div>
-              </div>
-            </div>
-    
-            <!-- User info -->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-              <h4 class="panel-title">User info</h4>
-              </div>
-              <div class="panel-body">
-                <table class="table profile__table">
-                  <tbody>
-                    <tr>
-                      <th><strong>Location</strong></th>
-                      <td>United States</td>
-                    </tr>
-                    <tr>
-                      <th><strong>Company name</strong></th>
-                      <td>Simpleqode.com</td>
-                    </tr>
-                    <tr>
-                      <th><strong>Position</strong></th>
-                      <td>Front-end developer</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-    
-            <!-- Community -->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-              <h4 class="panel-title">Community</h4>
-              </div>
-              <div class="panel-body">
-                <table class="table profile__table">
-                  <tbody>
-                    <tr>
-                      <th><strong>Comments</strong></th>
-                      <td>58584</td>
-                    </tr>
-                    <tr>
-                      <th><strong>Member since</strong></th>
-                      <td>Jan 01, 2016</td>
-                    </tr>
-                    <tr>
-                      <th><strong>Last login</strong></th>
-                      <td>1 day ago</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-    
-            <!-- Latest posts -->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-              <h4 class="panel-title">Latest posts</h4>
-              </div>
-              <div class="panel-body">
-                <div class="profile__comments">
-                  <div class="profile-comments__item">
-                    <div class="profile-comments__controls">
-                      <a href="#"><i class="fa fa-share-square-o"></i></a>
-                      <a href="#"><i class="fa fa-edit"></i></a>
-                      <a href="#"><i class="fa fa-trash-o"></i></a>
-                    </div>
-                    <div class="profile-comments__avatar">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
-                    </div>
-                    <div class="profile-comments__body">
-                      <h5 class="profile-comments__sender">
-                        Richard Roe <small>2 hours ago</small>
-                      </h5>
-                      <div class="profile-comments__content">
-                       good work
-                      </div>
-                    </div>
-                  </div>
-                  <div class="profile-comments__item">
-                    <div class="profile-comments__controls">
-                      <a href="#"><i class="fa fa-share-square-o"></i></a>
-                      <a href="#"><i class="fa fa-edit"></i></a>
-                      <a href="#"><i class="fa fa-trash-o"></i></a>
-                    </div>
-                    <div class="profile-comments__avatar">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="...">
-                    </div>
-                    <div class="profile-comments__body">
-                      <h5 class="profile-comments__sender">
-                        Richard Roe <small>5 hours ago</small>
-                      </h5>
-                      <div class="profile-comments__content">
-                        that is good
-                      </div>
-                    </div>
-                  </div>
-                  <div class="profile-comments__item">
-                    <div class="profile-comments__controls">
-                      <a href="#"><i class="fa fa-share-square-o"></i></a>
-                      <a href="#"><i class="fa fa-edit"></i></a>
-                      <a href="#"><i class="fa fa-trash-o"></i></a>
-                    </div>
-                    <div class="profile-comments__avatar">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="...">
-                    </div>
-                    <div class="profile-comments__body">
-                      <h5 class="profile-comments__sender">
-                        Richard Roe <small>1 day ago</small>
-                      </h5>
-                      <div class="profile-comments__content">
-                        amazing
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-          </div>
-          <div class="col-xs-12 col-sm-3">
-            
-            <!-- Contact user -->
-            <p>
-              <a href="#" class="profile__contact-btn btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#profile__contact-form">
-                Contact user
-              </a>
-            </p>
-    
-            <hr class="profile__contact-hr">
-            
-            <!-- Contact info -->
-            <div class="profile__contact-info">
-              <div class="profile__contact-info-item">
-                <div class="profile__contact-info-icon">
-                  <i class="fa fa-phone"></i>
-                </div>
-                <div class="profile__contact-info-body">
-                  <h5 class="profile__contact-info-heading">Work number</h5>
-                  (000)12345678
-                </div>
-              </div>
-              <div class="profile__contact-info-item">
-                <div class="profile__contact-info-icon">
-                  <i class="fa fa-phone"></i>
-                </div>
-                <div class="profile__contact-info-body">
-                  <h5 class="profile__contact-info-heading">Mobile number</h5>
-                  (00)12345678
-                </div>
-              </div>
-              <div class="profile__contact-info-item">
-                <div class="profile__contact-info-icon">
-                  <i class="fa fa-envelope-square"></i>
-                </div>
-                <div class="profile__contact-info-body">
-                  <h5 class="profile__contact-info-heading">E-mail address</h5>
-                  <a href="mailto:admin@domain.com">admin@domain.com</a>
-                </div>
-              </div>
-              <div class="profile__contact-info-item">
-                <div class="profile__contact-info-icon">
-                  <i class="fa fa-map-marker"></i>
-                </div>
-                <div class="profile__contact-info-body">
-                  <h5 class="profile__contact-info-heading">Work address</h5>
-                  
-                </div>
-              </div>
-            </div>
-    
-          </div>
+      <div class="row" style="margin:10px">
+        <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>
+        <div class="col-md-4">
+          <input id="product_name" name="name" placeholder="PRODUCT NAME" class="form-control input-md" required=""
+            type="text">
         </div>
-    </div>
+      </div>
 
-    {% endblock %}
+      <div class="row" style="margin:10px">
+        <label class="col-md-4 control-label" for="product_description">PRODUCT DESCRIPTION</label>
+        <div class="col-md-4">
+          <input id="product_description" name="description" placeholder="PRODUCT DESCRIPTION"
+            class="form-control input-md" required="" type="text">
+        </div>
+      </div>
+
+      <div class="row" style="margin:10px">
+        <label class="col-md-4 control-label" for="product_category">PRODUCT CATEGORY</label>
+        <div class="col-md-4">
+          <input id="product_category" name="category" placeholder="PRODUCT CATEGORY" class="form-control input-md"
+            required="" type="text">
+        </div>
+      </div>
+
+
+      <div class="row" style="margin:10px">
+        <label class="col-md-4 control-label" for="price">PRICE</label>
+        <div class="col-md-4">
+          <input id="price" name="price" placeholder="PRICE" class="form-control input-md" required="" type="text">
+        </div>
+      </div>
+
+      <div class="row" style="margin:10px">
+        <label class="col-md-4 control-label" for="custom_concept">CUSTOM CONCEPT</label>
+        <div class="col-md-4">
+          <input id="custom_concept" name="custom_concept" placeholder="CUSTOM CONCEPT" class="form-control input-md"
+            required="" type="text">
+        </div>
+      </div>
+
+  </div>
+
+  <div class="container">
+    <h2>Image Upload</h2>
+
+
+    <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <!-- image-preview-filename input [CUT FROM HERE]-->
+      <div class="input-group image-preview">
+        <input type="text" class="form-control image-preview-filename" disabled="disabled">
+        <!-- don't give a name === doesn't send on POST/GET -->
+        <span class="input-group-btn">
+          <!-- image-preview-clear button -->
+          <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+            <span class="glyphicon glyphicon-remove"></span> Clear
+          </button>
+          <!-- image-preview-input -->
+          <div class="btn btn-default image-preview-input">
+            <span class="glyphicon glyphicon-folder-open"></span>
+            <span class="image-preview-input-title">Browse</span>
+            <input type="file" accept="image/png, image/jpeg, image/gif" name="user_file" />
+            <!-- rename it -->
+          </div>
+        </span>
+        <button class="btn btn-primary" type="submit">Upload</button>
+      </div><!-- /input-group image-preview [TO HERE]-->
+    </div>
+  </div>
+
+</div>
+</div>
+</form>
+</div>
+<script>
+  $(document).on('click', '#close-preview', function () {
+    $('.image-preview').popover('hide');
+    // Hover befor close the preview
+    $('.image-preview').hover(
+      function () {
+        $('.image-preview').popover('show');
+      },
+      function () {
+        $('.image-preview').popover('hide');
+      }
+    );
+  });
+
+  $(function () {
+    // Create the close button
+    var closebtn = $('<button/>', {
+      type: "button",
+      text: 'x',
+      id: 'close-preview',
+      style: 'font-size: initial;',
+    });
+    closebtn.attr("class", "close pull-right");
+    // Set the popover default content
+    $('.image-preview').popover({
+      trigger: 'manual',
+      html: true,
+      title: "<strong>Preview</strong>" + $(closebtn)[0].outerHTML,
+      content: "There's no image",
+      placement: 'bottom'
+    });
+    // Clear event
+    $('.image-preview-clear').click(function () {
+      $('.image-preview').attr("data-content", "").popover('hide');
+      $('.image-preview-filename').val("");
+      $('.image-preview-clear').hide();
+      $('.image-preview-input input:file').val("");
+      $(".image-preview-input-title").text("Browse");
+    });
+    // Create the preview image
+    $(".image-preview-input input:file").change(function () {
+      var img = $('<img/>', {
+        id: 'dynamic',
+        width: 250,
+        height: 200
+      });
+      var file = this.files[0];
+      var reader = new FileReader();
+      // Set preview image into the popover data-content
+      reader.onload = function (e) {
+        $(".image-preview-input-title").text("Change");
+        $(".image-preview-clear").show();
+        $(".image-preview-filename").val(file.name);
+        img.attr('src', e.target.result);
+        $(".image-preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+      }
+      reader.readAsDataURL(file);
+    });
+  });
+</script>
+{% endblock %}
