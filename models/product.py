@@ -1,6 +1,6 @@
 from models.base_model import BaseModel
 import peewee as pw
-from models.seller import Seller
+from models.user import User
 
 
 class Product (BaseModel):
@@ -10,7 +10,7 @@ class Product (BaseModel):
 	price = pw.CharField()
 	product_url = pw.CharField()
 	custom_concept = pw.CharField()
-	seller_id = pw.ForeignKeyField(Seller, backref='sellers')
+	seller_id = pw.ForeignKeyField(User, backref='sellers')
 
 	
 	
