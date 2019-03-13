@@ -10,44 +10,28 @@
 <img src={{search_image}} style="width:300px; height:300px" alt="">
 
 {%if match==True%}
-    <p><strong>Yay! We have found your furniture soulmate! It is the {{product_match.name}}</strong></p>
-    <a href="{{product_match.image_photo_url}}" data-toggle="lightbox">    
-        <img class="img-fluid img-thumbnail"  style="width:100px; height:100px" src="{{product_match.image_photo_url}}" />
+    <p><strong>Yay! We have found your furniture soulmate! It is the {{matching_products.name}}</strong></p>
+    <a href="{{matching_products.image_photo_url}}" data-toggle="lightbox">    
+        <img class="img-fluid img-thumbnail"  style="width:100px; height:100px" src="{{matching_products.image_photo_url}}" />
     </a> 
 {%else%}
-    <p><strong>We could not find an exact model. But based on this very powerful machine learning algorithm, we think you're looking for a {{category_match.category}}</strong></p>
+    <p><strong>We could not find an exact model.</p>
 
 {%endif%}
 
     <p>Perhaps you could consider these similar items:</p>
 
     <div class="row">
-    {%for item in category_match%}
+    {%for product in similar_products%}
     <div class="col-3">
-                <a href="{{item.image_photo_url}}" data-toggle="lightbox">    
-                        <img class="img-fluid img-thumbnail"  style="width:200px; height:200px" src="{{item.image_photo_url}}" />
+                <a href="{{product.image_photo_url}}" data-toggle="lightbox">    
+                        <img class="img-fluid img-thumbnail"  style="width:200px; height:200px" src="{{product.image_photo_url}}" />
                 </a>
-                <p>{{item.name}}</p>  
+                <p>{{product.name}}</p> 
+
         </div>
     {%endfor%}
     </div>
-
-   
-
-
-<h3>General Model - [chair, table, sofa, armchair]</h3>
-{%for x,y in gen_result_list%}
-
-    <div class="row">
-        <div class="col">
-            {{x}}
-        </div>
-        <div class="col">
-            {{y}}
-        </div>
-    </div>
-
-{%endfor%}
 
 
 {%endblock%}

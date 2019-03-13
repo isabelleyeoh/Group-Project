@@ -1,0 +1,82 @@
+{% extends "_layout.html" %}
+{% block title %}
+
+{%endblock%}
+
+{% block content%}
+
+<!-- Matching Product -->
+{%if match==True%}
+  <div class="container" id="product-section" style="margin: 20px">
+    <div class="row">
+      <div class="col-md-6">
+        <a href="{{matching_products.image_photo_url}}" data-toggle="lightbox">    
+            <img class="image-responsive"  height="80%"  width="80%" src="{{matching_products.image_photo_url}}" />
+        </a> 
+      </div>
+
+      <div class="col-md-6">
+        <h1>{{matching_products.name}}</h1>
+
+        <span class="label label-primary">Vintage</span>
+        <span class="monospaced">Model No. 1960140180</span>
+
+        <p class="description">
+          {{matching_products.description}}
+        </p>
+
+        <div class="row">
+          <div class="col-md-12 bottom-rule">
+            <h2 class="product-price">RM{{matching_products.price}}</h2>
+          </div>
+        </div><!-- end row -->
+
+        <div class="row add-to-cart">
+
+          <div class="col-md-6">
+            <button class="btn btn-lg btn-brand">
+              Buy online
+            </button>
+          </div>
+
+          <div class="col-md-6">
+            <button class="btn btn-lg btn-brand">
+              Add to wishlist
+            </button>
+          </div>
+        </div><!-- end row -->
+
+        <div class="row more-product-images" style="margin:10px">
+          <img src="../../../../static/images/special_chair1.4.JPG" alt="" height="20%" width="20%" />
+          <img src="../../../../static/images/special chair1.1.JPG" alt="" height="20%" width="20%" />
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+{%else%}
+  <h4>Sorry! Your Snapshop does not return any results. But do checkout some similar products that our smart machine learning software has picked out!</h4>
+{%endif%}
+
+<!-- Recommended Products -->
+
+<div class="container" id="recommended-products" style="border-top: 1px solid lightgrey">
+  <div style="margin:10px">
+    <h5>Recommended products</h5>
+  </div>
+
+  <div class="row">
+      {%for product in similar_products%}
+      <div class="col-lg-3">
+        <h5>{{product.name}}</h5> 
+          <a href="{{product.image_photo_url}}" data-toggle="lightbox">    
+            <img alt="" height="80%" width="80%" src="{{product.image_photo_url}}" />
+          </a>
+      </div>
+      {%endfor%}
+  </div>
+
+</div>
+
+{%endblock%}
