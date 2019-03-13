@@ -61,7 +61,7 @@ def login():
 def check():
     email_to_check = request.form['email']
     password_to_check = request.form['password']
-    user = User.get_or_none(Buyer.email == email_to_check) 
+    user = User.get_or_none(User.email == email_to_check) 
     hashed_password = user.password
     result = check_password_hash(hashed_password, password_to_check)
 
