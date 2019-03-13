@@ -18,7 +18,7 @@ def model_prediction(image_path, model,input_file, workflow_id):
 
     result_cust_model=[]
     result_gen_model = []
-    ref_list=['chair','table','sofa','armchair', 'lamp', 'bookcase','shelf']
+    ref_list=['chair','table','sofa','armchair', 'lamp', 'bookcase','shelf', 'stool']
 
     # Custom Model: Append results and return a list
     for concept in response_data['results'][0]['outputs'][1]['data']['concepts']:
@@ -37,6 +37,22 @@ def model_prediction(image_path, model,input_file, workflow_id):
             result_gen_model.append(val)
         else:
             pass
+
+    # Search By Image:
+
+    search_image=app_clarifai_search.inputs.search_by_image(url=image_path)
+
+    for item in search_image:
+        if item.score>0.80:
+            print(item.input_id, item.score)
+
+    breakpoint()
+    # Validation: If no results in either General or Model:
+
+    if len(result_gen_model)==0:
+        result_gen_model.append(('No Result', 'No Result'))
+
+        
 
     return result_cust_model, result_gen_model
 
