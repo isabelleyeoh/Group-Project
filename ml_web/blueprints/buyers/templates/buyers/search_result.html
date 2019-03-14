@@ -47,11 +47,15 @@
     </div>
   </div>
 {%else%}
-  <h4>Sorry! Your Snapshop does not return any results. But do checkout some similar products that our smart machine learning software has picked out!</h4>
+<div class="row">
+  <div class="col">
+    <h4>Sorry! Your Snapshop does not return any results. But do checkout some similar products that our smart machine learning software has picked out!</h4>
+  </div>
+</div>
 {%endif%}
 
 <!-- Recommended Products -->
-
+{%if similar_products%}
 <div class="container" id="recommended-products" style="border-top: 1px solid lightgrey">
   <div style="margin:10px">
     <h5>Recommended products</h5>
@@ -60,15 +64,22 @@
   <div class="row">
       {%for product in similar_products%}
       <div class="col-lg-3">
-        <h5>{{product.name}}</h5> 
-        <small>RM{{product.price}}</small>
+        <div>
+          <h5>{{product.name}}</h5> 
+          <small>RM{{product.price}}</small>
+        </div> 
+        <div>
+            <a href="{{product.product_url}}"  class="btn btn-sm btn-primary" role="button">Buy Online</a>
+        </div>
           <a href="{{product.image_photo_url}}" data-toggle="lightbox">    
             <img alt="" height="80%" width="80%" src="{{product.image_photo_url}}" />
           </a>
       </div>
       {%endfor%}
   </div>
-
 </div>
+{%else%}
+  <h1>Sorry - we were not able to find any recommended products</h1>
+{%endif%}
 
 {%endblock%}

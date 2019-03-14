@@ -13,7 +13,7 @@ from werkzeug import secure_filename
 from app import app
 
 from PIL import Image as PILImage
-from io import BytesIO
+from io import BytesIO  
 
 from ml_web.helpers.helper_clarifai import app_clarifai, model_prediction
 
@@ -95,23 +95,33 @@ def index():
         # Check: Exact Product Match
         if cust_result_list[0][1]>0.70:
             # Get matching model + recommended items
-            matching_products = Product.get_or_none(Product.concept==cust_result_list[0][0])
             search_result_list=search_result_list[:5]
+
+            matching_products = Product.get_or_none(Product.concept==cust_result_list[0][0])
             # Check: Top 3 similar Products but omit matching model
-            similar_products= Product.select().where(Product.clarifai_id << search_result_list, Product.clarifai_id!=matching_products.clarifai_id)
+            try:
+                similar_products= Product.select().where(Product.clarifai_id << search_result_list,             Product.clarifai_id!=matching_products.clarifai_id)
+            except:
+                similar_products=""
+           
             match = True
             
         else:
             # Recomend items based on furniture type
             matching_products=""
-            search_result_list=search_result_list[:4]
-            # Check: Top 3 similar Products but omit matching model
-            similar_products= Product.select().where(Product.clarifai_id << search_result_list)
-
+            try:
+                search_result_list=search_result_list[:4]
+                # Check: Top 3 similar Products but omit matching model
+                similar_products= Product.select().where(Product.clarifai_id << search_result_list)
+            except:
+                similar_products=""
             match = False
-
+        # breakpoint()
         # Render: template showing product result
-        return render_template("buyers/search_result.html", cust_result_list=cust_result_list,file_name=file.filename, match = match, matching_products=matching_products,similar_products=similar_products,search_image=image_url)
+        if len(similar_products)==0 and len(matching_products)==0:
+            return redirect(url_for('buyers.search_error'))
+        else:
+            return render_template("buyers/search_result.html", cust_result_list=cust_result_list,file_name=file.filename, match = match, matching_products=matching_products,similar_products=similar_products,search_image=image_url)
 
     return "Failed"
 
@@ -123,3 +133,11 @@ def edit(id):
 @buyers_blueprint.route('/<id>', methods=['POST'])
 def update(id):
     pass
+
+# JM Search Error result
+@buyers_blueprint.route('/search_error', methods=['GET'])
+def search_error():
+
+    return render_template("buyers/search_not_found.html")
+
+
