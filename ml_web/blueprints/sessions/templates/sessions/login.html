@@ -2,26 +2,62 @@
 
 {% block header %}
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+<meta name="viewport" content="width=device-width">
+
+<style>
+
+  .OR {
+    text-align: center;
+    position: relative;
+    bottom: 5px;
+  }
+
+  .OR::before{
+    content: '';
+    position: absolute;
+    border: 1px solid black;
+    left:  18rem;
+    bottom: 0.8rem;
+    right: 1rem;
+  }
+
+  .OR::after{
+    content: '';
+    position: absolute;
+    border: 1px solid black;
+    right: 18rem;
+    bottom: 0.8rem;
+    left: 1rem;
+  }
+
+</style>
+
+
 {% endblock %}
 
 {% block content %}
+{{current_user.username}}
 <div class='container'>
     <div class='col-6 offset-3 jumbotron registration mt-4'>
         <legend class='text-center'>
             <h1>Sign In</h1>
         </legend>
-        <button class = 'btn btn-info google form-group col-12'>Login via Google</button>
-        <button class = 'btn btn-info facebook form-group col-12'>Login via Facebook</button>
+        <a href="{{ url_for('sessions.google_form') }}"><button class = 'btn btn-info google form-group col-12'>Login via Google</button></a>
 
-        <div>OR</div>
+        <button class = 'btn btn-info google form-group col-12' id='facebook'>Login via Facebook</button>
 
-        <form action="{{ url_for('sessions.check') }}" method="POST">
+        <div class='OR'>OR</div>
+
+        <form id='login_form' action="{{ url_for('sessions.check') }}" method="POST">
+            <input type="hidden" value="{{csrf_token()}}" name='csrf_token'> 
+            <input id='fb' type="hidden" name="fb_email">
             <!--=======EMAIL ADDRESS =======-->
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Email address" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" name='email' class="form-control" placeholder="Email address" aria-label="Username" aria-describedby="basic-addon1">
             </div>
 
             <!--=======PASSWORD =======-->
@@ -29,7 +65,7 @@
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
                 </div>
-                <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="password" name='password' class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
             </div>
 
             <!--=======SUBMIT =======-->
@@ -39,4 +75,97 @@
 
     </div>	
 </div>
+
+<script>
+
+    let form = document.getElementById('login_form');
+
+    window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '430830920826038',
+          cookie     : true,  
+                              
+          xfbml      : true,  
+          version    : 'v3.2' 
+        });
+    
+        FB.getLoginStatus(function(response) {
+    
+          if (response.status === 'connected') {
+            FB.logout(function(response) {
+              statusChangeCallback(response);
+            })
+          }
+          else {
+            statusChangeCallback(response);
+          }
+        });
+    
+      };
+    
+    
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    
+    
+    
+      function statusChangeCallback(response) {
+        console.log('statusChangeCallback');
+     
+        if (response.status === 'connected') {
+       
+          console.log(response)
+        } else {
+      
+          console.log(response)
+        }
+      }
+    
+    
+      function checkLoginState() {
+        FB.login(function(response) {
+          console.log(response);
+          getUserData();
+        });
+      }
+
+      function getUserData() {
+        FB.api('/me', {fields: 'name,email'}, (response) => {
+            console.log(response.email);
+
+            fetch('http://localhost:5000/api/v1/login', {
+              method: 'POST',
+              headers: new Headers({
+                'content-type': 'application/json'
+              }),
+              body:JSON.stringify({
+                  'email':response.email
+              })
+            })
+            .then((response)=>{
+             // window.location.reload()
+              let  res = response.json()
+              .then(res=>{
+                console.log(res)
+                debugger
+              })
+            })
+            .catch(error => console.log(error));
+            
+        });
+    }
+
+    document.getElementById('facebook').onclick = function () {
+      checkLoginState();
+    };
+
+
+
+
+</script>
 {% endblock %}

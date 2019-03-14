@@ -5,7 +5,7 @@ from models.seller import Seller
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from ml_web import oauth
+from ml_web.util.google import oauth
 
 
 
@@ -21,7 +21,6 @@ def new(usertype):
 
 @sessions_blueprint.route('/', methods=['POST'])
 def create():
-<<<<<<< refs/remotes/origin/feat/registration
     userType = int(request.form['userType'])
     username = request.form['username']
     email = request.form['email']
@@ -30,39 +29,45 @@ def create():
     
     if userType == 1:
         buyer = Buyer(username=username, email=email, password=hashed_password)
-        buyer.save()
-        return 'Buyer registered'
+        if buyer.save():
+            return 'buyer registered'
+        else:
+            return str(buyer.errors)
 
     elif userType == 2:
         seller = Seller(username=username, email=email, password=hashed_password)
-        seller.save()
-        return 'seller registered'
-=======
-    
->>>>>>> 'form'
-
+        if seller.save():
+            return 'seller registered'
+        else:
+            return str(seller.errors)
 
 @sessions_blueprint.route('/login', methods=['GET'])
 def login():
-<<<<<<< refs/remotes/origin/feat/registration
     return render_template('sessions/login.html')
-=======
-
->>>>>>> 'form'
 
 
-@sessions_blueprint.route('/', methods=['POST'])
+@sessions_blueprint.route('/check', methods=['POST'])
 def check():
-    username = request.form['username']
+
     email_to_check = request.form['email']
     password_to_check = request.form['password']
-    user = Buyer.get_or_none(Buyer.email == email_to_check) or Seller.get_or_none(Seller.email == email_to_check)
-    hashed_password = user.password
-    result = check_password_hash(hashed_password, password_to_check)
+    buyer = Buyer.get_or_none(Buyer.email == email_to_check)
+    seller = Seller.get_or_none(Seller.email == email_to_check)
 
-    if result:
-        login_user(buyer) or login_user(seller)
-        return 'logged in'
+    if buyer:
+        hashed_password = buyer.password
+        result = check_password_hash(hashed_password, password_to_check)
+        if result:
+            login_user(buyer)
+            return 'buyer logged in'
+    
+    elif seller:
+        hashed_password = seller.password
+        result = check_password_hash(hashed_password, password_to_check)
+        if result:
+            login_user(seller)
+            return 'seller logged in'
+
     else:
         flash("Wrong password")
         return 'logged in failed'
@@ -79,11 +84,16 @@ def authorize():
     token = oauth.google.authorize_access_token()
     email = oauth.google.get(
         'https://www.googleapis.com/oauth2/v2/userinfo').json()['email']
-    user = Buyer.get_or_none(Buyer.email == email) or Seller.get_or_none(Seller.email == email) 
+    buyer = Buyer.get_or_none(Buyer.email == email)  
+    seller = Seller.get_or_none(Seller.email == email) 
 
-    if user:
-        login_user(buyer) or login_user(seller)
-        return redirect(url_for('home'))
+    if buyer:
+        login_user(buyer)
+        return 'buyer logged in'
+        
+    elif seller:
+        login_user(seller)
+        return 'seller logged in'
     else:
         flash('Authentication failed.')
         return redirect(url_for('sessions.new'))

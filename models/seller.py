@@ -2,8 +2,9 @@ from models.base_model import BaseModel
 from models.buyer import Buyer
 import peewee as pw
 import re
+from flask_login import UserMixin
 
-class Seller(BaseModel):
+class Seller(BaseModel, UserMixin):
     username = pw.CharField(unique=True)
     email = pw.CharField(unique=True)
     password = pw.CharField()
