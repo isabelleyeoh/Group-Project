@@ -4,8 +4,13 @@ from models.product import Product
 
 
 class Image (BaseModel):
+	product_id = pw.ForeignKeyField(Product, backref='product')
+	seller_id = pw.ForeignKeyField(User, backref='sellers')
 	image_url = pw.CharField(unique=True)
-	product_id = pw.ForeignKeyField(Product, backref='products')
 
-	
+def hi():
+	pass
+
+
+
 	
