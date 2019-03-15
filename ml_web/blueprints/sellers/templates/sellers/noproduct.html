@@ -1,0 +1,22 @@
+{% extends "_layout.html" %}
+{% block title %}
+Search Result
+{% endblock %}
+
+{% block content%}
+
+<div class="container">
+	<div style="margin:10px">
+		<h5>You search for {{category}}.</h5>
+	</div>
+
+	<div class="row" id="recommended-products" style="border-top: 1px solid lightgrey; padding-top:20px">
+		<h3>We do not have this product in our catalog at this moment.</h3>
+	</div>
+
+	<div>
+		<img src="../../../../static/images/sorry-gif.gif" style="height:200%" />
+	</div>
+
+</div>
+{%endblock%}

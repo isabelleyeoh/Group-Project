@@ -24,17 +24,18 @@ buyers_blueprint = Blueprint('buyers',
 
 @buyers_blueprint.route('/new', methods=['GET'])
 def new():
-    pass
-
-@buyers_blueprint.route('/', methods=['POST'])
-def create():
-    pass
+    return render_template("buyers/search_result.html")
 
 
-@buyers_blueprint.route('/<username>', methods=["GET"])
-def show(username):
-    pass
-
+@buyers_blueprint.route('/search', methods=["POST"])
+def search():
+    category = request.form['product']
+    products = Product.select().where(Product.category == category)
+    if products.exists():
+        return render_template('sellers/product.html', products=products, category=category)
+    else:
+        return render_template('sellers/noproduct.html', category=category)
+    
 
 @buyers_blueprint.route('/search_result', methods=["POST"])
 def index():
@@ -115,11 +116,3 @@ def index():
 
     return "Failed"
 
-@buyers_blueprint.route('/<id>/edit', methods=['GET'])
-def edit(id):
-    pass
-
-
-@buyers_blueprint.route('/<id>', methods=['POST'])
-def update(id):
-    pass

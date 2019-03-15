@@ -1,6 +1,7 @@
 from models.base_model import BaseModel
 import peewee as pw
 from models.product import Product
+from models.user import User
 
 
 class Image (BaseModel):
@@ -8,8 +9,7 @@ class Image (BaseModel):
 	seller_id = pw.ForeignKeyField(User, backref='sellers')
 	image_url = pw.CharField(unique=True)
 
-def hi():
-	pass
+
 
 
 

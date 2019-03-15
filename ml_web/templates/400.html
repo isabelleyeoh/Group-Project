@@ -1,0 +1,18 @@
+{% extends "_layout.html" %}
+
+{% block title %}Error{% endblock %}
+
+{% block content  %}
+<div id="notfound">
+	<div class="notfound">
+		<div class="notfound-404">
+			<h1>:(</h1>
+		</div>
+		<h2>400 - Bad Request</h2>
+		<p>Do not refresh the page after submitting the form. We have implemented CSRF protection to stop hacking
+			activities.
+		</p>
+		<a href="{{ url_for('index') }}">home page</a>
+	</div>
+</div>
+{% endblock %}

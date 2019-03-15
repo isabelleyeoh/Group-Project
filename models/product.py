@@ -9,7 +9,7 @@ from app import app
 class Product (BaseModel):
     seller_id = pw.ForeignKeyField(User, backref='sellers')
     name = pw.CharField(unique=True)
-    image_url = pw.CharField(unique=True)
+    image_url = pw.CharField()
     category=pw.CharField()
     price = pw.CharField()
     description = pw.TextField()
