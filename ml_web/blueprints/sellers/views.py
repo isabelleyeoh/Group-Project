@@ -39,3 +39,4 @@ def update(id):
 @sellers_blueprint.route('/<int:id>', methods=['GET'])
 def product(id):
     pass
+

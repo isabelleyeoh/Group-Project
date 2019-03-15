@@ -1,0 +1,13 @@
+<!-- For testing purposes - this section to be put into Image Upload template when ready -->
+
+<h1>Test Image Upload</h1>
+
+
+
+<form action="{{url_for('buyers.index')}}" method="POST" enctype="multipart/form-data">
+
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+    <input type="file" name="search_image" >
+    <button type="submit" class="btn btn-primary">Upload File</button>
+
+</form>
