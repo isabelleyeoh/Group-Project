@@ -1,6 +1,7 @@
 from models.base_model import BaseModel
 import peewee as pw
 from models.product import Product
+from models.user import User
 
 
 class Image (BaseModel):

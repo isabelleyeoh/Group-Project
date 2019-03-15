@@ -1,0 +1,28 @@
+{% extends "_layout.html" %}
+{% block title %}
+Search Result
+{% endblock %}
+
+{% block content%}
+
+<div class="container">
+	<div style="margin:10px">
+		<h5>You search for {{category}}.</h5>
+	</div>
+
+	<div class="row" id="recommended-products" style="border-top: 1px solid lightgrey">
+		{% for product in products %}
+		<div class="col-lg-3" style="margin-top:20px">
+			<h5>{{product.name}}</h5>
+			<small>RM{{product.price}}</small>
+			<a href="{{product.product_url}}" data-toggle="lightbox">
+				<img alt="" height="80%" width="80%" src="{{product.image_photo_url}}" />
+			</a>
+		</div>
+		{% endfor %}
+
+	</div>
+
+</div>
+
+{%endblock%}
