@@ -61,6 +61,11 @@
     <div class="col-lg-3">
       <h5>{{product.name}}</h5>
       <small>RM{{product.price}}</small>
+      <br/>
+      <div class="col-md-6">
+        <a href="{{product.product_url}}" class="btn btn-lg btn-brand" role="button">Buy Online</a>
+      </div>
+      <br/>
       <a href="{{product.product_url}}" data-toggle="lightbox">
         <img alt="" height="80%" width="80%" src="{{product.image_photo_url}}" />
       </a>
