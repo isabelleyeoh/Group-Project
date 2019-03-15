@@ -52,6 +52,7 @@ def create(usertype):
         login_user(user)
         return render_template('home.html')
 
+
 @sessions_blueprint.route('/login', methods=['GET'])
 def login():
     return render_template('sessions/login.html')

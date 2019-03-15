@@ -7,7 +7,7 @@ from playhouse.hybrid import hybrid_property
 from app import app
 
 class Product (BaseModel):
-    seller_id = pw.ForeignKeyField(User, backref='sellers')
+    seller_id = pw.ForeignKeyField(User, null=True,backref='sellers')
     name = pw.CharField(unique=True)
     image_url = pw.CharField(unique=True)
     category=pw.CharField()
@@ -17,8 +17,6 @@ class Product (BaseModel):
     clarifai_id=pw.CharField(default="Yes")
     product_url=pw.CharField(null=True)
 
-	
-	
 
  # Hybrid property
     @hybrid_property

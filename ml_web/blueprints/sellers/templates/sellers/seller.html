@@ -1,6 +1,6 @@
 {% extends "_layout.html" %}
 {% block title %}
-seller
+Upload Product
 {% endblock %}
 {% block header %}
 
@@ -46,12 +46,28 @@ seller
       </div>
 
       <div class="row" style="margin:10px">
-        <label class="col-md-4 control-label" for="custom_concept">CUSTOM CONCEPT</label>
+        <label class="col-md-4 control-label" for="product_url">PRODUCT URL http://wwww....</label>
         <div class="col-md-4">
-          <input id="custom_concept" name="custom_concept" placeholder="CUSTOM CONCEPT" class="form-control input-md"
-            required="" type="text">
+          <input id="product_url" name="product_url" placeholder="PRODUCT_URL" class="form-control input-md" required=""
+            type="text">
         </div>
       </div>
+      <div class="row" style="margin:10px">
+        <label class="col-md-4 control-label" for="concept">CONCEPT</label>
+        <div class="col-md-4">
+          <input id="concept" name="concept" placeholder="CONCEPT" class="form-control input-md" required=""
+            type="text">
+        </div>
+      </div>
+
+      <div class="row" style="margin:10px">
+        <label class="col-md-4 control-label" for="clarifai_id">ENTER MACHINE LEARNING ID</label>
+        <div class="col-md-4">
+          <input id="clarifai_id" name="clarifai_id" placeholder="CLARIFAI_ID" class="form-control input-md" required=""
+            type="text">
+        </div>
+      </div>
+
 
   </div>
 

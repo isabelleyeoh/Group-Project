@@ -6,8 +6,9 @@ from models.user import User
 
 class Image (BaseModel):
 	product_id = pw.ForeignKeyField(Product, backref='product')
-	seller_id = pw.ForeignKeyField(User, backref='sellers')
+	seller_id = pw.ForeignKeyField(User, backref='sellers', null=True)
 	image_url = pw.CharField(unique=True)
+
 
 
 	

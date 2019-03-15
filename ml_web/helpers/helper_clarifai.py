@@ -33,6 +33,7 @@ def model_prediction(image_path, model,input_file, workflow_id):
         if item.score>0:
             val=(item.input_id)
             result_search_model.append(val)
+            # print(item.input_id, item.score)
     
     return result_cust_model, result_search_model
 

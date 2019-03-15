@@ -20,8 +20,8 @@
     rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="/ml_web/static/css/custom.css" rel="stylesheet">
-  {% endassets %}
 
+  {% endassets %}
 
 
 
@@ -36,6 +36,11 @@
   <script src="js/homepage.js"></script>
   <script>!function (e) { "use strict"; e('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () { if (location.pathname.replace(/^\//, "") == this.pathname.replace(/^\//, "") && location.hostname == this.hostname) { var a = e(this.hash); if ((a = a.length ? a : e("[name=" + this.hash.slice(1) + "]")).length) return e("html, body").animate({ scrollTop: a.offset().top - 70 }, 1e3, "easeInOutExpo"), !1 } }), e(".js-scroll-trigger").click(function () { e(".navbar-collapse").collapse("hide") }), e("body").scrollspy({ target: "#mainNav", offset: 100 }); var a = function () { 100 < e("#mainNav").offset().top ? e("#mainNav").addClass("navbar-shrink") : e("#mainNav").removeClass("navbar-shrink") }; a(), e(window).scroll(a) }(jQuery);</script> -->
 
+  {% assets "home_js" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   {% endassets %}
 
   {% block header %}{% endblock %}
@@ -69,17 +74,16 @@
 
         <a class="nav-link" href="/#howitworks">How It Works</a>
         <a class="nav-link" href="/#inspiration">Inspiration</a>
-        <a class="nav-link" href="/#faq">FAQ</a>
         <a class="nav-link" href="/#contact">Contact</a>
 
-        <form class="form-inline my-2 my-lg-0" action=/users/search method='POST'>
+        <form class="form-inline my-2 my-lg-0" action="{{ url_for('buyers.search') }}" method='POST'>
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /><br>
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" />
+          <input class="form-control mr-sm-2" name="product" type="search" placeholder="Search" />
           <img src="../static/images/search-icon.png" width="35" height="28" alt="">
         </form>
 
         {% if current_user.seller %}
-        <a class="nav-link" href="{{ url_for('sellers.new') }}">Edit Product</a>
+        <a class="nav-link" href="{{ url_for('sellers.new') }}">Upload Product</a>
         {% else %}
         {% endif %}
 
