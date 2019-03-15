@@ -50,7 +50,7 @@
 {%endif%}
 
 <!-- Recommended Products -->
-
+{%if similar_products%}
 <div class="container" id="recommended-products" style="border-top: 1px solid lightgrey">
   <div style="margin:10px">
     <h5>Recommended products</h5>
@@ -67,7 +67,9 @@
     </div>
     {%endfor%}
   </div>
-
 </div>
+{%else%}
+  <h1>Sorry - we were not able to find any recommended products</h1>
+{%endif%}
 
 {%endblock%}

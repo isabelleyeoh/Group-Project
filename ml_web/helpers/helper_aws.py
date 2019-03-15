@@ -13,7 +13,6 @@ aws_secret_access_key=app.config['S3_SECRET']
 
 # Function to upload file to s3
 
-
 def upload_file_to_s3(file, key, bucket_name, content_type):
     
     try:
