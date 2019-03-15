@@ -91,7 +91,7 @@ def index():
 
         cust_result_list=result[0]
         search_result_list=result[1]
-
+        
         # Check: Exact Product Match
         if cust_result_list[0][1]>0.70:
             # Get matching model + recommended items
@@ -100,7 +100,7 @@ def index():
             matching_products = Product.get_or_none(Product.concept==cust_result_list[0][0])
             # Check: Top 3 similar Products but omit matching model
             try:
-                similar_products= Product.select().where(Product.clarifai_id << search_result_list,             Product.clarifai_id!=matching_products.clarifai_id)
+                similar_products= Product.select().where(Product.clarifai_id << search_result_list,Product.clarifai_id!=matching_products.clarifai_id)
             except:
                 similar_products=""
            
@@ -116,9 +116,9 @@ def index():
             except:
                 similar_products=""
             match = False
-        # breakpoint()
+
         # Render: template showing product result
-        if len(similar_products)==0 and len(matching_products)==0:
+        if len(similar_products)==0 and matching_products=="":
             return redirect(url_for('buyers.search_error'))
         else:
             return render_template("buyers/search_result.html", cust_result_list=cust_result_list,file_name=file.filename, match = match, matching_products=matching_products,similar_products=similar_products,search_image=image_url)

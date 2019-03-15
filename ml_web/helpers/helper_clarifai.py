@@ -30,10 +30,10 @@ def model_prediction(image_path, model,input_file, workflow_id):
     search_image=app_clarifai_search.inputs.search_by_image(url=image_path)
 
     for item in search_image:
-        if item.score>0.60:
+        if item.score>0:
             val=(item.input_id)
             result_search_model.append(val)
-            print(item.input_id, item.score)
+            # print(item.input_id, item.score)
     
     return result_cust_model, result_search_model
 

@@ -3,6 +3,8 @@
 
 {% block content%}
 
+<html class="htmlLoader"></html>
+
 <body class="uploaderBody">
     
     <div id="content">
@@ -18,12 +20,13 @@
     
 </body>
 
+<!-- Loader - bar and circle -->
 <div class="bar">
     <div class="circle"></div>
     <p class="loading">Loading</p>
 </div>
 
-<!-- JS Script -->
+<!-- Loader - JS Script -->
 <script>
     function loading(){
         $("#content").hide();

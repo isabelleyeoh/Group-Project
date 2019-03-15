@@ -381,7 +381,7 @@ footer{
     padding:5rem 0
 }
 
-/* JM */
+/* JM added */
 
 .masthead-error{
     position:relative;
@@ -397,19 +397,8 @@ footer{
     background-size:cover
 }
 
-/* #loading {
-    background: url('../images/loader.gif') no-repeat center center;
-    position: absolute;
-    display:none;
-    top: -50px;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 9999999;
-} */
-
-
-html, .uploaderBody {
+/* JM: Loader CSS */
+.htmlLoader, .uploaderBody {
     background: #fff;
     width: 100%;
     overflow-x: hidden;
@@ -424,15 +413,15 @@ html, .uploaderBody {
     margin: 0 auto;
     background: #347fc3;
 
-    margin-top: 150px;
+    margin-top: 300px;
 }
 
 .circle {
     position: absolute;
     top: -30px;
     margin-left: -30px;
-    height: 60px;
-    width: 60px;
+    height: 40px;
+    width: 40px;
     left: 0;
     background: #347fc3;
     border-radius: 30%;
@@ -441,9 +430,9 @@ html, .uploaderBody {
 
 .loading {
     position: absolute;
-    top: -35px;
+    top: -30px;
     right: -85px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     color:white;
     font-family: helvetica, sans-serif;
     font-weight: bold;
