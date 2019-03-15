@@ -11,6 +11,7 @@ sellers_blueprint = Blueprint('sellers',
 
 
 @sellers_blueprint.route('/new', methods=['GET'])
+@login_required
 def new():
     return render_template('sellers/seller.html')
 

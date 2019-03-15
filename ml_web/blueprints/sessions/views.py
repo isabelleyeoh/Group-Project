@@ -39,6 +39,11 @@ def create(usertype):
     hashed_password = generate_password_hash(password)
 
     if usertype == 'buyer':
+        
+        
+        
+        
+        
         user = User(username=username, email=email, password=hashed_password)
         user.save()
         flash("buyer registered")
