@@ -156,11 +156,10 @@
               })
             })
             .then((response)=>{
-             // window.location.reload()
+              window.location.reload()
               let  res = response.json()
               .then(res=>{
                 console.log(res)
-                debugger
               })
             })
             .catch(error => console.log(error));

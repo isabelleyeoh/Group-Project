@@ -5,15 +5,12 @@ from flask_assets import Environment, Bundle
 from ml_web.util.assets import bundles
 import os
 import config
-from ml_web.helpers.google_oauth import oauth
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from models.user import User
-from ml_web.util.google import oauth
 
 
 
-oauth.init_app(app)
 
 csrf = CSRFProtect(app)
 

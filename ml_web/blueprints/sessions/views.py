@@ -4,7 +4,7 @@ from models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from ml_web import oauth
+from ml_web.util.google import oauth
 
 
 
@@ -57,7 +57,7 @@ def login():
     return render_template('sessions/login.html')
 
 
-@sessions_blueprint.route('/check', methods=['POST'])
+@sessions_blueprint.route('/', methods=['POST'])
 def check():
     email_to_check = request.form['email']
     password_to_check = request.form['password']
