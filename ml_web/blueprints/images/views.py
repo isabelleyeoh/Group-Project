@@ -5,6 +5,9 @@ from ml_web.helpers.helper_clarifai import app_clarifai, model_prediction
 from models.image import Image
 from models.product import Product
 
+# JM added
+from ml_web.helpers.helper_aws import upload_file_to_s3, allowed_file
+from app import app
 
 # JM added
 from ml_web.helpers.helper_aws import upload_file_to_s3, allowed_file
