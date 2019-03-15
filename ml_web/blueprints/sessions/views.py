@@ -4,7 +4,7 @@ from models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from ml_web.util.google import oauth
+from ml_web import oauth
 
 
 

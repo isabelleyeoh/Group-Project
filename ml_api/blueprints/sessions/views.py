@@ -1,5 +1,5 @@
 from flask import jsonify, Blueprint, request, make_response
-from models.buyer import Buyer
+from models.user import User
 from werkzeug.security import check_password_hash
 # from flask_wtf.csrf import CsrfProtect
 from ml_web import csrf
@@ -13,7 +13,7 @@ def sign_in():
     # get the post data
     post_data = request.get_json()
     # check if user already exists
-    user = Buyer.get_or_none(email=post_data.get('email'))
+    user = User.get_or_none(email=post_data.get('email'))
     if user :
         login_user(user)
         responseObject = {

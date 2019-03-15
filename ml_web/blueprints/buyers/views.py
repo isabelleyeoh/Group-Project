@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models.base_model import db, BaseModel
-from models.buyer import Buyer
+from models.user import User
 from models.image import Image
 from models.product import Product
 

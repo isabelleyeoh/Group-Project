@@ -7,7 +7,7 @@ from playhouse.hybrid import hybrid_property
 from app import app
 
 class Product (BaseModel):
-    seller_id = pw.ForeignKeyField(Seller, backref='sellers')
+    seller_id = pw.ForeignKeyField(User, backref='sellers')
     name = pw.CharField(unique=True)
     image_url = pw.CharField(unique=True)
     category=pw.CharField()

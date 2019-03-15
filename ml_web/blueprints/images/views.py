@@ -1,11 +1,16 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-# from ml_web.util.helper_clarifai import app_clarifai, predict_model_chair
-from models.image import Image
-from ml_web.helpers.aws_image import upload_file_to_s3, allowed_file
 from werkzeug import secure_filename
-from app import app
-from models.product import Product
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from ml_web.helpers.helper_clarifai import app_clarifai, model_prediction
+from models.image import Image
+from models.product import Product
+
+# JM added
+from ml_web.helpers.helper_aws import upload_file_to_s3, allowed_file
+from app import app
+
+from PIL import Image as PILImage
+from io import BytesIO
 
 
 images_blueprint = Blueprint('images',
