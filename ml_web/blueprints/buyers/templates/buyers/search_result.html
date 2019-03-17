@@ -10,34 +10,32 @@
 <body class="my-body">
   <!-- Matching Product -->
   {%if match==True%}
-  <div class="container my-container">
-    <div class="row">
-      <div class="col-md-6">
-        <a href="{{matching_products.product_url}}" data-toggle="lightbox">
-          <img class="image-responsive" height="80%" width="80%" src="{{matching_products.image_photo_url}}" />
+  <div class="container my-container" style="border-bottom: 1px solid lightgrey; padding-left:50px;padding-right:50px">
+    <div class="row h-100">
+      <div class="col-6 h-100 text-center">
+        <a href="{{matching_products.product_url}}">
+          <img class="img-responsive h-100" src="{{matching_products.image_photo_url}}"/>
         </a>
       </div>
 
-      <div class="col-md-6">
-        <h1>{{matching_products.name}}</h1>
-
-        <span class="monospaced">Model No. 1960140180</span>
-
-        <p class="description">
-          {{matching_products.description}}
-        </p>
-
-        <div class="row">
-          <div class="col-md-12 bottom-rule">
-            <h2 class="product-price">RM{{matching_products.price}}</h2>
+      <div class="col-6 h-100">
+        
+        <div class="row h-100">
+          <div class="col-12 bottom-rule" style="padding-left:15px">
+            <h1 class="d-block">{{matching_products.name}}</h1>
+            <h2 class="d- block product-price">RM{{matching_products.price}}</h2>
+            <span class="d-block monospaced">Seller: Ikea</span>
+            <p class="d-block description" >
+              {{matching_products.description}}
+            </p>
+          </div>
+          <div class="col-6 h-100">
+            <a href="{{matching_products.product_url}}" class="btn btn-lg btn-brand" role="button">Buy</a>
           </div>
         </div><!-- end row -->
 
-        <div class="row add-to-cart">
+        <div class="row h-25 add-to-cart">
 
-          <div class="col-md-6">
-            <a href="{{matching_products.product_url}}" class="btn btn-lg btn-brand" role="button">Buy</a>
-          </div>
 
 
         </div><!-- end row -->
@@ -46,11 +44,25 @@
     </div>
   </div>
   {%else%}
-  <div class="container h-25">
-    <p class="text-center">Snapshop could not find an exact match, but why not look at some recommended items?</p>
+  <div class="container h-25" style="border-bottom: 1px solid lightgrey">
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <h3 class="text-center align-middle">Oh Snap!</h3>
+        <p class="text-center align-middle">We can't find an exact match, but check out some similar items recommended below? Or search again!</p>
+      </div>
+    </div>
   </div>
   {%endif%}
 
+  <!-- Search for another product -->
+  <div class="container my-container-search">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-6 ">
+          <!-- <p class="text-center"><a href="{{ url_for('images.new')}}">Search Again</a></p> -->
+          <h5 class="text-center"><a href="{{ url_for('images.new')}}">Search Again</a></h5>
+        </div>
+      </div>
+  </div>
   <!-- Recommended Products -->
   {%if similar_products%}
   <div class="container my-container-similar" id="recommended-products" style="border-top: 1px solid lightgrey">
@@ -58,7 +70,7 @@
       <h3>Recommended products</h3>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-top:15px">
       {%for product in similar_products%}
       <div class="col-lg-3">
         <h5>{{product.name}}</h5>

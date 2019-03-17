@@ -610,9 +610,13 @@ footer{
     height:60%;
 }
 
+.my-container-search{
+    height:10%;
+}
+
 .my-container-similar{
    
-    height:40%;
+    height:30%;
 }
 
 .my-body, .my-html{
