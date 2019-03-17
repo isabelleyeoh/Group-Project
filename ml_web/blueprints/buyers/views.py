@@ -139,3 +139,10 @@ def search_error():
     return render_template("buyers/search_not_found.html")
 
 
+# To remove
+
+@buyers_blueprint.route('/search_testing')
+def search_testing_layout():
+
+    return render_template("buyers/test_search_result.html")
+

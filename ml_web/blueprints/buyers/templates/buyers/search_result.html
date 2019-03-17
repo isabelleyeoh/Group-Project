@@ -5,76 +5,79 @@
 
 {% block content%}
 
-<!-- Matching Product -->
-{%if match==True%}
-<div class="container" id="product-section" style="margin: 20px">
-  <div class="row">
-    <div class="col-md-6">
-      <a href="{{matching_products.product_url}}" data-toggle="lightbox">
-        <img class="image-responsive" height="80%" width="80%" src="{{matching_products.image_photo_url}}" />
-      </a>
-    </div>
-
-    <div class="col-md-6">
-      <h1>{{matching_products.name}}</h1>
-
-      <span class="monospaced">Model No. 1960140180</span>
-
-      <p class="description">
-        {{matching_products.description}}
-      </p>
-
-      <div class="row">
-        <div class="col-md-12 bottom-rule">
-          <h2 class="product-price">RM{{matching_products.price}}</h2>
-        </div>
-      </div><!-- end row -->
-
-      <div class="row add-to-cart">
-
-        <div class="col-md-6">
-          <a href="{{matching_products.product_url}}" class="btn btn-lg btn-brand" role="button">Buy Online</a>
-        </div>
-
-
-      </div><!-- end row -->
-
-    </div>
-  </div>
-</div>
-{%else%}
-<div class="container" style="margin:20px">
-  <h4>Sorry! Your Snapshop does not return any results. But do checkout some similar products that our smart machine
-    learning software has picked out!</h4>
-</div>
-{%endif%}
-
-<!-- Recommended Products -->
-{%if similar_products%}
-<div class="container" id="recommended-products" style="border-top: 1px solid lightgrey">
-  <div style="margin:10px">
-    <h5>Recommended products</h5>
-  </div>
-
-  <div class="row">
-    {%for product in similar_products%}
-    <div class="col-lg-3">
-      <h5>{{product.name}}</h5>
-      <small>RM{{product.price}}</small>
-      <br/>
+<!-- To add in -->
+<html class="my-html"></html>
+<body class="my-body">
+  <!-- Matching Product -->
+  {%if match==True%}
+  <div class="container my-container">
+    <div class="row">
       <div class="col-md-6">
-        <a href="{{product.product_url}}" class="btn btn-lg btn-brand" role="button">Buy Online</a>
+        <a href="{{matching_products.product_url}}" data-toggle="lightbox">
+          <img class="image-responsive" height="80%" width="80%" src="{{matching_products.image_photo_url}}" />
+        </a>
       </div>
-      <br/>
-      <a href="{{product.product_url}}" data-toggle="lightbox">
-        <img alt="" height="80%" width="80%" src="{{product.image_photo_url}}" />
-      </a>
+
+      <div class="col-md-6">
+        <h1>{{matching_products.name}}</h1>
+
+        <span class="monospaced">Model No. 1960140180</span>
+
+        <p class="description">
+          {{matching_products.description}}
+        </p>
+
+        <div class="row">
+          <div class="col-md-12 bottom-rule">
+            <h2 class="product-price">RM{{matching_products.price}}</h2>
+          </div>
+        </div><!-- end row -->
+
+        <div class="row add-to-cart">
+
+          <div class="col-md-6">
+            <a href="{{matching_products.product_url}}" class="btn btn-lg btn-brand" role="button">Buy</a>
+          </div>
+
+
+        </div><!-- end row -->
+
+      </div>
     </div>
-    {%endfor%}
   </div>
-</div>
-{%else%}
-  <h1>Sorry - we were not able to find any recommended products</h1>
-{%endif%}
+  {%else%}
+  <div class="container h-25">
+    <p class="text-center">Snapshop could not find an exact match, but why not look at some recommended items?</p>
+  </div>
+  {%endif%}
+
+  <!-- Recommended Products -->
+  {%if similar_products%}
+  <div class="container my-container-similar" id="recommended-products" style="border-top: 1px solid lightgrey">
+    <div>
+      <h3>Recommended products</h3>
+    </div>
+
+    <div class="row">
+      {%for product in similar_products%}
+      <div class="col-lg-3">
+        <h5>{{product.name}}</h5>
+        <small>RM{{product.price}}</small>
+        <br/>
+        <div class="col-md-6">
+          <a href="{{product.product_url}}" class="btn btn-lg btn-brand" role="button">Buy</a>
+        </div>
+        <br/>
+        <a href="{{product.product_url}}" data-toggle="lightbox">
+          <img class="my-img" alt="" src="{{product.image_photo_url}}" />
+        </a>
+      </div>
+      {%endfor%}
+    </div>
+  </div>
+  {%else%}
+    <h1>Sorry - we were not able to find any recommended products</h1>
+  {%endif%}
+</body>
 
 {%endblock%}

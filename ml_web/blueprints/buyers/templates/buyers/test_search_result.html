@@ -1,0 +1,72 @@
+{% extends "_layout.html" %}
+{% block title %}
+
+{%endblock%}
+
+{% block content%}
+
+<html class="my-html"></html>
+<body class="my-body">
+
+    <!-- Matching Product - if there is a result -->
+    <div class="container my-container">
+        
+        <div class="row">
+            <div class="col-6">
+                Image
+            </div>
+            <div class="col-6">
+                <h1>Product Name</h1>
+
+                <span class="monospaced">Model No. 1960140180</span>
+            
+                <p class="description">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In ea aperiam distinctio asperiores quas necessitatibus voluptates sint reprehenderit nihil sequi alias architecto nemo atque, magnam saepe provident rerum? Asperiores, unde.
+                </p>
+                <div class="row">
+                    Price
+                </div>
+                <div class="row">
+                    Buy Now
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <!-- Recommended Products -->
+    <div class="container my-container-similar "style="border-top: 1px solid lightgrey">
+
+    <h3>Recommended Items</h3>
+        <div class="row">
+            <div class="col">
+                <h5>Product Name</h5>
+                <small>RMxxxx</small>
+                <br/>
+
+                <a href="#" class="btn btn-xs btn-brand" role="button">Buy Online</a>
+
+                <br/>
+                <a href="#" data-toggle="lightbox">
+                    <img height="80%" width="80%" src="" />
+                </a>
+            </div>
+
+            <div class="col">
+                Image 2
+            </div>
+            <div class="col">
+                Image 3
+            </div>
+            <div class="col">
+                Image 4
+            </div>
+
+
+        </div>
+
+    </div>
+    
+</body>
+
+{%endblock%}
