@@ -78,7 +78,7 @@ def create():
         concept = request.form['concept']
 
 
-        product = Product.create(image_url=str(output), name=name, description=description, category=category, price=price, concept=concept, seller_id=current_user.id, product_url=product_url, clarifai_id=clarifai_id)
+        product = Product.create(image_url=str(file.filename), name=name, description=description, category=category, price=price, concept=concept, seller_id=current_user.id, product_url=product_url, clarifai_id=clarifai_id)
 
         product.save()
 
