@@ -601,3 +601,31 @@ footer{
     75% {left: 100%; -webkit-transform: rotate(450deg); width: 150px; height: 150px;}
     100 {right: 100%;}
 } 
+
+
+/* To remove */
+
+.my-container{
+    
+    height:60%;
+}
+
+.my-container-search{
+    height:10%;
+}
+
+.my-container-similar{
+   
+    height:30%;
+}
+
+.my-body, .my-html{
+    height:100%
+}
+
+.my-img {
+    width:auto;
+    max-width:230px;
+    height:auto;
+    max-height:250px;
+}
