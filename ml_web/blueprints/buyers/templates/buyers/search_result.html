@@ -6,90 +6,94 @@
 {% block content%}
 
 <!-- To add in -->
-<html class="my-html"></html>
+<html class="my-html">
+
+</html>
+
 <body class="my-body">
-  <!-- Matching Product -->
-  {%if match==True%}
-  <div class="container my-container" style="border-bottom: 1px solid lightgrey; padding-left:50px;padding-right:50px">
-    <div class="row h-100">
-      <div class="col-6 h-100 text-center">
-        <a href="{{matching_products.product_url}}">
-          <img class="img-responsive h-100" src="{{matching_products.image_photo_url}}"/>
-        </a>
-      </div>
+  <div class="container-fluid">
 
-      <div class="col-6 h-100">
-        
-        <div class="row h-100">
-          <div class="col-12 bottom-rule" style="padding-left:15px">
-            <h1 class="d-block">{{matching_products.name}}</h1>
-            <h2 class="d- block product-price">RM{{matching_products.price}}</h2>
-            <span class="d-block monospaced">Seller: Ikea</span>
-            <p class="d-block description" >
-              {{matching_products.description}}
-            </p>
+    <!-- Matching Product -->
+    {%if match==True%}
+    <div class="container my-container"
+      style="border-bottom: 1px solid lightgrey; padding-left:50px;padding-right:50px">
+      <div class="row h-100">
+        <div class="col-6 h-100 text-center">
+          <a href="{{matching_products.product_url}}">
+            <img class="img-responsive h-100" src="{{matching_products.image_photo_url}}" />
+          </a>
+        </div>
+
+        <div class="col-6 h-100">
+
+          <div class="row h-100">
+            <div class="col-12 bottom-rule" style="padding-left:15px">
+              <h1 class="d-block">{{matching_products.name}}</h1>
+              <h2 class="d- block product-price">RM{{matching_products.price}}</h2>
+              <span class="d-block monospaced">Seller: Ikea</span>
+              <p class="d-block description">
+                {{matching_products.description}}
+              </p>
+            </div>
+            <div class="col-6 h-100">
+              <a href="{{matching_products.product_url}}" class="btn btn-lg btn-brand" role="button">Buy</a>
+            </div>
           </div>
-          <div class="col-6 h-100">
-            <a href="{{matching_products.product_url}}" class="btn btn-lg btn-brand" role="button">Buy</a>
-          </div>
-        </div><!-- end row -->
+          <!-- end row -->
 
-        <div class="row h-25 add-to-cart">
-
-
-
-        </div><!-- end row -->
-
+        </div>
       </div>
     </div>
-  </div>
-  {%else%}
-  <div class="container h-25" style="border-bottom: 1px solid lightgrey">
-    <div class="row justify-content-center">
-      <div class="col-6">
-        <h3 class="text-center align-middle">Oh Snap!</h3>
-        <p class="text-center align-middle">We can't find an exact match, but check out some similar items recommended below? Or search again!</p>
+    {%else%}
+    <div class="container h-25" style="border-bottom: 1px solid lightgrey">
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <h3 class="text-center align-middle">Oh Snap!</h3>
+          <p class="text-center align-middle">We can't find an exact match, but check out some similar items recommended
+            below? Or search again!</p>
+        </div>
       </div>
     </div>
-  </div>
-  {%endif%}
+    {%endif%}
 
-  <!-- Search for another product -->
-  <div class="container my-container-search">
+    <!-- Search for another product -->
+    <div class="container my-container-search">
       <div class="row justify-content-center align-items-center">
         <div class="col-6 ">
           <!-- <p class="text-center"><a href="{{ url_for('images.new')}}">Search Again</a></p> -->
           <h5 class="text-center"><a href="{{ url_for('images.new')}}">Search Again</a></h5>
         </div>
       </div>
-  </div>
-  <!-- Recommended Products -->
-  {%if similar_products%}
-  <div class="container my-container-similar" id="recommended-products" style="border-top: 1px solid lightgrey">
-    <div>
-      <h3>Recommended products</h3>
     </div>
-
-    <div class="row" style="margin-top:15px">
-      {%for product in similar_products%}
-      <div class="col-lg-3">
-        <h5>{{product.name}}</h5>
-        <small>RM{{product.price}}</small>
-        <br/>
-        <div class="col-md-6">
-          <a href="{{product.product_url}}" class="btn btn-lg btn-brand" role="button">Buy</a>
-        </div>
-        <br/>
-        <a href="{{product.product_url}}" data-toggle="lightbox">
-          <img class="my-img" alt="" src="{{product.image_photo_url}}" />
-        </a>
+    <!-- Recommended Products -->
+    {%if similar_products%}
+    <div class="container my-container-similar" id="recommended-products" style="border-top: 1px solid lightgrey">
+      <div>
+        <h3>Recommended products</h3>
       </div>
-      {%endfor%}
+
+      <div class="row" style="margin-top:15px">
+        {%for product in similar_products%}
+        <div class="col-lg-3">
+          <h5>{{product.name}}</h5>
+          <small>RM{{product.price}}</small>
+          <br />
+          <div class="col-md-6">
+            <a href="{{product.product_url}}" class="btn btn-lg btn-brand" role="button"
+              style="margin-bottom: 10px">Buy</a>
+          </div>
+          <br />
+          <a href="{{product.product_url}}" data-toggle="lightbox">
+            <img class="my-img" alt="" src="{{product.image_photo_url}}" />
+          </a>
+        </div>
+        {%endfor%}
+      </div>
     </div>
+    {%else%}
+
+    {%endif%}
   </div>
-  {%else%}
-    <h1>Sorry - we were not able to find any recommended products</h1>
-  {%endif%}
 </body>
 
 {%endblock%}

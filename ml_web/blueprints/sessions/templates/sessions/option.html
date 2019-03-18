@@ -23,38 +23,33 @@ Signup
 
 {% block content %}
 <div class='container'>
-	<div class='col-6 offset-3 jumbotron registration mt-4'>
-		<legend class='text-center'>
-			<h1>Create Account</h1>
-			<p>Get started with your free account</p>
-		</legend>
+	<div class="row justify-content-center">
+		<div class='col-9 jumbotron registration mt-4'>
+			<legend class='text-center'>
+				<h1>Create Account</h1>
+				<p>Get started with your free account</p>
+			</legend>
 
 
-		<form action="{{ url_for('sessions.new') }}" method="POST">
-			<!--=======BUYER SELLER =======-->
-			<div class="input-group mb-3 center d-flex justify-content-center">
-				<!-- <div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon1"><i class="fas fa-user-md"></i></span>
-				</div> -->
-				<!-- <select name="usertype" class="custom-select" id="userType">
-					<option>Choose...</option>
-					<option name="usertype" value="buyer">Buyer</option>
-					<option name="usertype" value="seller">Seller</option>
-				</select> -->
-				<div class="radio">
-					<label class="radio-inline"><input type="radio" name="usertype" value="buyer"
-							onclick="this.form.submit();"> Buyer </label>
+			<form action="{{ url_for('sessions.new') }}" method="POST">
+				<!--=======BUYER SELLER =======-->
+				<div class="input-group mb-3 center d-flex justify-content-center">
+
+					<div class="radio">
+						<label class="radio-inline"><input type="radio" name="usertype" value="buyer"
+								onclick="this.form.submit();"> Buyer </label>
+					</div>
+					<div class="radio">
+						<label class="radio-inline"><input type="radio" name="usertype" value="seller"
+								onclick="this.form.submit();"> Seller </label>
+					</div>
+
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<!-- <button type='submit' class="btn btn-primary btn-xs">Next</button> -->
+
 				</div>
-				<div class="radio">
-					<label class="radio-inline"><input type="radio" name="usertype" value="seller"
-							onclick="this.form.submit();"> Seller </label>
-				</div>
-
-				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-				<!-- <button type='submit' class="btn btn-primary btn-xs">Next</button> -->
-
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
 {% endblock %}
