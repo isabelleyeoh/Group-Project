@@ -3,6 +3,9 @@
 Homepage
 {% endblock %}
 {% block header %}
+{% for error in errors if errors|length > 0 %}
+<li>{{error}}</li>
+{% endfor %}
 
 
 <title>

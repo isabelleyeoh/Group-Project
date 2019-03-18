@@ -51,6 +51,10 @@ def page_not_found(e):
 def page_not_found(e):
     return render_template('400.html')
 
+@app.errorhandler(405)
+def page_not_found(e):
+    return render_template('405.html')
+
 @app.route("/")
 def home():
     return render_template('home.html')

@@ -1,0 +1,17 @@
+{% extends "_layout.html" %}
+
+{% block title %}Error{% endblock %}
+
+{% block content  %}
+<div id="notfound">
+	<div class="notfound">
+		<div class="notfound-404">
+			<h1>:(</h1>
+		</div>
+		<h2>405 - Method not allowed</h2>
+		<p>You have no access into this page.
+		</p>
+		<a href="{{ url_for('index') }}">home page</a>
+	</div>
+</div>
+{% endblock %}
