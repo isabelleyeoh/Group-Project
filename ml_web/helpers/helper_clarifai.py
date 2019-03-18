@@ -20,7 +20,7 @@ def model_prediction(image_path, model,input_file, workflow_id):
     result_search_model=[]
 
     # Custom Model: Append results and return a list
-    for concept in response_data['results'][0]['outputs'][1]['data']['concepts']:
+    for concept in response_data['results'][0]['outputs'][0]['data']['concepts']:
         if concept['value']>0: 
             val = (concept['name'],concept['value'])
             result_cust_model.append(val)

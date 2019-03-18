@@ -41,52 +41,55 @@ Login
 {% block content %}
 {{current_user.username}}
 <div class='container'>
-  <div class='col-6 offset-3 jumbotron registration mt-4'>
-    <legend class='text-center'>
-      <h1>Sign In</h1>
-    </legend>
-    <a href="{{ url_for('sessions.google_form') }}"><button class='btn btn-info google form-group col-12'>Login via
-        Google</button></a>
+  <div class="row justify-content-center">
 
-    <button class='btn btn-info google form-group col-12' id='facebook'>Login via Facebook</button>
+    <div class='col-9 jumbotron registration mt-4'>
+      <legend class='text-center'>
+        <h1>Sign In</h1>
+      </legend>
+      <a href="{{ url_for('sessions.google_form') }}"><button class='btn btn-info google form-group col-12'>Login via
+          Google</button></a>
 
-    <div class='OR'>OR</div>
+      <button class='btn btn-info google form-group col-12' id='facebook'>Login via Facebook</button>
 
-    <form id='login_form' action="{{ url_for('sessions.check') }}" method="POST">
-      <input type="hidden" value="{{csrf_token()}}" name='csrf_token'>
-      <input id='fb' type="hidden" name="fb_email">
-      <!--=======EMAIL ADDRESS =======-->
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
+      <div class='OR'>OR</div>
+
+      <form id='login_form' action="{{ url_for('sessions.check') }}" method="POST">
+        <input type="hidden" value="{{csrf_token()}}" name='csrf_token'>
+        <input id='fb' type="hidden" name="fb_email">
+        <!--=======EMAIL ADDRESS =======-->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
+          </div>
+          <input type="text" name='email' class="form-control" placeholder="Email address" aria-label="Username"
+            aria-describedby="basic-addon1">
         </div>
-        <input type="text" name='email' class="form-control" placeholder="Email address" aria-label="Username"
-          aria-describedby="basic-addon1">
-      </div>
 
-      <!--=======PASSWORD =======-->
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
+        <!--=======PASSWORD =======-->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
+          </div>
+          <input type="password" name='password' class="form-control" placeholder="Password" aria-label="Username"
+            aria-describedby="basic-addon1">
         </div>
-        <input type="password" name='password' class="form-control" placeholder="Password" aria-label="Username"
-          aria-describedby="basic-addon1">
-      </div>
 
-      <!--=======SUBMIT =======-->
+        <!--=======SUBMIT =======-->
 
 
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /><br>
-      <button type='submit' class='btn btn-primary col-12 form-group'>SignIn</button>
-      <p class='text-center'>Don't have an accont? <a href="{{ url_for('sessions.new', usertype=usertype) }}">Sign
-          Up</a></p>
-    </form>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /><br>
+        <button type='submit' class='btn btn-primary col-12 form-group'>SignIn</button>
+        <p class='text-center'>Don't have an accont? <a href="{{ url_for('sessions.new', usertype=usertype) }}">Sign
+            Up</a></p>
+      </form>
 
 
 
+
+    </div>
 
   </div>
-
 </div>
 
 <script>
