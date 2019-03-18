@@ -4,7 +4,7 @@ from models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from ml_web import oauth
+from ml_web.util.google import oauth
 
 
 
@@ -39,6 +39,11 @@ def create(usertype):
     hashed_password = generate_password_hash(password)
 
     if usertype == 'buyer':
+        
+        
+        
+        
+        
         user = User(username=username, email=email, password=hashed_password)
         user.save()
         flash("buyer registered")

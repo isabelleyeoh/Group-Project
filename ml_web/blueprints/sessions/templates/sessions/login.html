@@ -1,107 +1,186 @@
 {% extends '_layout.html' %}
+{% block title %}
+Login
+{% endblock %}
 
 {% block header %}
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+<meta name="viewport" content="width=device-width">
+
+<style>
+  .OR {
+    text-align: center;
+    position: relative;
+    bottom: 5px;
+  }
+
+  .OR::before {
+    content: '';
+    position: absolute;
+    border: 1px solid black;
+    left: 18rem;
+    bottom: 0.8rem;
+    right: 1rem;
+  }
+
+  .OR::after {
+    content: '';
+    position: absolute;
+    border: 1px solid black;
+    right: 18rem;
+    bottom: 0.8rem;
+    left: 1rem;
+  }
+</style>
+
 
 {% endblock %}
 
 {% block content %}
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2&appId=432097757527438&autoLogAppEvents=1"></script>
-
-
+{{current_user.username}}
 <div class='container'>
-    <div class='col-6 offset-3 jumbotron registration mt-4'>
-        <div>
-            <legend class='text-center'>
-                <h1>Sign In</h1>
-            </legend>
+  <div class="row justify-content-center">
 
-            <div class="fb-login-button" data-size="large" data-button-type="login_with" data-auto-logout-link="false"
-                data-use-continue-as="false"></div>
+    <div class='col-9 jumbotron registration mt-4'>
+      <legend class='text-center'>
+        <h1>Sign In</h1>
+      </legend>
+      <a href="{{ url_for('sessions.google_form') }}"><button class='btn btn-info google form-group col-12'>Login via
+          Google</button></a>
 
-            <a href="{{ url_for('sessions.google_form') }}">
-                <button class="loginBtn loginBtn--google">
-                    Log in with Google
-                </button>
-            </a>
+      <button class='btn btn-info google form-group col-12' id='facebook'>Login via Facebook</button>
+
+      <div class='OR'>OR</div>
+
+      <form id='login_form' action="{{ url_for('sessions.check') }}" method="POST">
+        <input type="hidden" value="{{csrf_token()}}" name='csrf_token'>
+        <input id='fb' type="hidden" name="fb_email">
+        <!--=======EMAIL ADDRESS =======-->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
+          </div>
+          <input type="text" name='email' class="form-control" placeholder="Email address" aria-label="Username"
+            aria-describedby="basic-addon1">
         </div>
 
-        <div>OR</div>
+        <!--=======PASSWORD =======-->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
+          </div>
+          <input type="password" name='password' class="form-control" placeholder="Password" aria-label="Username"
+            aria-describedby="basic-addon1">
+        </div>
 
-        <form action="{{ url_for('sessions.check') }}" method="POST">
-
-
-            <!--=======EMAIL ADDRESS =======-->
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
-                </div>
-                <input type="text" class="form-control" placeholder="Email address" name="email"
-                    aria-describedby="basic-addon1">
-            </div>
-
-            <!--=======PASSWORD =======-->
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></i></span>
-                </div>
-                <input type="password" class="form-control" placeholder="Password" name="password"
-                    aria-describedby="basic-addon1">
-            </div>
-
-            <!--=======SUBMIT =======-->
+        <!--=======SUBMIT =======-->
 
 
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /><br>
-            <button type='submit' class='btn btn-primary col-12 form-group'>SignIn</button>
-            <p class='text-center'>Don't have an accont? <a href="{{ url_for('sessions.new', usertype=usertype) }}">Sign
-                    Up</a></p>
-        </form>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /><br>
+        <button type='submit' class='btn btn-primary col-12 form-group'>SignIn</button>
+        <p class='text-center'>Don't have an accont? <a href="{{ url_for('sessions.new', usertype=usertype) }}">Sign
+            Up</a></p>
+      </form>
 
 
 
 
     </div>
 
+  </div>
 </div>
 
-
 <script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '432097757527438',
-            cookie: true,
-            xfbml: true,
-            version: 'v3.2'
-        });
 
-        FB.AppEvents.logPageView();
+  let form = document.getElementById('login_form');
 
-    };
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: '430830920826038',
+      cookie: true,
 
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) { return; }
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-
-    FB.getLoginStatus(function (response) {
-        statusChangeCallback(response);
+      xfbml: true,
+      version: 'v3.2'
     });
 
-    function checkLoginState() {
-        FB.getLoginStatus(function (response) {
-            statusChangeCallback(response);
-        });
+    FB.getLoginStatus(function (response) {
+
+      if (response.status === 'connected') {
+        FB.logout(function (response) {
+          statusChangeCallback(response);
+        })
+      }
+      else {
+        statusChangeCallback(response);
+      }
+    });
+
+  };
+
+
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+
+    if (response.status === 'connected') {
+
+      console.log(response)
+    } else {
+
+      console.log(response)
     }
+  }
+
+
+  function checkLoginState() {
+    FB.login(function (response) {
+      console.log(response);
+      getUserData();
+    });
+  }
+
+  function getUserData() {
+    FB.api('/me', { fields: 'name,email' }, (response) => {
+      console.log(response.email);
+
+      fetch('http://localhost:5000/api/v1/login', {
+        method: 'POST',
+        headers: new Headers({
+          'content-type': 'application/json'
+        }),
+        body: JSON.stringify({
+          'email': response.email
+        })
+      })
+        .then((response) => {
+          window.location.href = "{{ url_for('index') }}"
+          let res = response.json()
+            .then(res => {
+              console.log(res)
+            })
+        })
+        .catch(error => console.log(error));
+
+    });
+  }
+
+  document.getElementById('facebook').onclick = function () {
+    checkLoginState();
+  };
+
+
+
 
 </script>
-
-
 {% endblock %}

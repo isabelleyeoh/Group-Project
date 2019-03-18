@@ -3,6 +3,9 @@
 Homepage
 {% endblock %}
 {% block header %}
+{% for error in errors if errors|length > 0 %}
+<li>{{error}}</li>
+{% endfor %}
 
 
 <title>
@@ -21,8 +24,8 @@ Homepage
       <div class="mx-auto text-center">
         <h1 class="mx-auto my-0 text-uppercase">See furniture that you love?</h1>
         <h2 class="text-white-50 mx-auto mt-2 mb-5">Use our app to find the product.</h2>
-        <a href="{{ url_for('buyers.index') }}" class="btn btn-primary js-scroll-trigger">buyer</a>
-        <a href="{{ url_for('sellers.index') }}" class="btn btn-primary js-scroll-trigger">seller</a>
+        <a href="{{ url_for('images.new') }}" class="btn btn-primary js-scroll-trigger">buyer</a>
+        <a href="{{ url_for('sessions.login') }}" class="btn btn-primary js-scroll-trigger">seller</a>
       </div>
     </div>
   </header>
@@ -87,27 +90,7 @@ Homepage
           </p>
         </div>
       </div>
-      <a href="#">Learn more</a>
-    </div>
-  </section>
 
-  <!-- Signup Section -->
-  <section id="signup" class="signup-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 col-lg-8 mx-auto text-center">
-
-          <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-          <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
-
-          <form class="form-inline d-flex">
-            <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail"
-              placeholder="Enter email address...">
-            <button type="submit" class="btn btn-primary mx-auto">Subscribe</button>
-          </form>
-
-        </div>
-      </div>
     </div>
   </section>
 
@@ -135,7 +118,7 @@ Homepage
               <h4 class="text-uppercase m-0">Email</h4>
               <hr class="my-4">
               <div class="small text-black-50">
-                <a href="#">project@domain.com</a>
+                <a href="#">hello@snapshop.com</a>
               </div>
             </div>
           </div>
@@ -147,37 +130,13 @@ Homepage
               <i class="fas fa-mobile-alt text-primary mb-2"></i>
               <h4 class="text-uppercase m-0">Phone</h4>
               <hr class="my-4">
-              <div class="small text-black-50">contact us through email</div>
+              <div class="small text-black-50">03-87780000</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="social d-flex justify-content-center">
-        <a class="mx-2">
-          <span class="fa fa-twitter"></span>
-        </a>
-        <a href="#" class="mx-2">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="#" class="mx-2">
-          <i class="fab fa-github"></i>
-        </a>
 
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-2"><img class="img-circle img-responsive" src=""></div>
-        <div class="col-md-2"><img class="img-circle img-responsive" src=""></div>
-        <div class="col-md-2"><img class="img-circle img-responsive" src=""></div>
-      </div>
     </div>
   </section>
 
@@ -185,7 +144,7 @@ Homepage
   <!-- Footer -->
   <footer class="bg-black small text-center text-white-50">
     <div class="container">
-      Copyright &copy; project 2019
+      Copyright &copy; Snapshop Enterprise 2019
     </div>
   </footer>
 

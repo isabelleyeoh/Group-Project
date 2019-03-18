@@ -13,12 +13,11 @@ aws_secret_access_key=app.config['S3_SECRET']
 
 # Function to upload file to s3
 
-
 def upload_file_to_s3(file, key, bucket_name, content_type):
     
     try:
 
-        s3.put_object(ACL='public-read',Body=file.getvalue(),Key=key,Bucket=bucket_name, ContentType= content_type)
+        s3.put_object(ACL='public-read',Body=file.getvalue(),Key=key,Bucket=bucket_name, ContentType=content_type)
 
     except Exception as e:
         # This is a catch all exception, edit this part to fit your needs.
@@ -30,6 +29,6 @@ def upload_file_to_s3(file, key, bucket_name, content_type):
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif']
+           filename.rsplit('.', 1)[1].lower() in ['png', 'jpg', 'jpeg', 'gif']
 
 

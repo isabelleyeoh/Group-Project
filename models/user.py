@@ -28,3 +28,5 @@ class User(BaseModel, UserMixin):
 
         if not validate_email.match(self.email):
             self.errors.append('check your email address given')
+
+    

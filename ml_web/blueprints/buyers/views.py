@@ -13,7 +13,7 @@ from werkzeug import secure_filename
 from app import app
 
 from PIL import Image as PILImage
-from io import BytesIO
+from io import BytesIO  
 
 from ml_web.helpers.helper_clarifai import app_clarifai, model_prediction
 
@@ -24,18 +24,18 @@ buyers_blueprint = Blueprint('buyers',
 
 @buyers_blueprint.route('/new', methods=['GET'])
 def new():
-    pass
-
-@buyers_blueprint.route('/', methods=['POST'])
-def create():
-    pass
+    return render_template("buyers/search_result.html")
 
 
-@buyers_blueprint.route('/<username>', methods=["GET"])
-def show(username):
-    pass
-
-
+@buyers_blueprint.route('/search', methods=["POST"])
+def search():
+    category = request.form['product']
+    products = Product.select().where(Product.category == category)
+    if products.exists():
+        return render_template('sellers/product.html', products=products, category=category)
+    else:
+        return render_template('sellers/noproduct.html', category=category)
+    
 @buyers_blueprint.route('/search_result', methods=["POST"])
 def index():
     # A: Check if there is file in form
@@ -91,35 +91,48 @@ def index():
 
         cust_result_list=result[0]
         search_result_list=result[1]
-
+        
         # Check: Exact Product Match
         if cust_result_list[0][1]>0.70:
             # Get matching model + recommended items
-            matching_products = Product.get_or_none(Product.concept==cust_result_list[0][0])
             search_result_list=search_result_list[:5]
+
+            matching_products = Product.get_or_none(Product.concept==cust_result_list[0][0])
             # Check: Top 3 similar Products but omit matching model
-            similar_products= Product.select().where(Product.clarifai_id << search_result_list, Product.clarifai_id!=matching_products.clarifai_id)
+            try:
+                similar_products= Product.select().where(Product.clarifai_id << search_result_list,Product.clarifai_id!=matching_products.clarifai_id)
+            except:
+                similar_products=""
+           
             match = True
             
         else:
             # Recomend items based on furniture type
             matching_products=""
-            search_result_list=search_result_list[:4]
-            # Check: Top 3 similar Products but omit matching model
-            similar_products= Product.select().where(Product.clarifai_id << search_result_list)
-
+            try:
+                search_result_list=search_result_list[:4]
+                # Check: Top 3 similar Products but omit matching model
+                similar_products= Product.select().where(Product.clarifai_id << search_result_list)
+            except:
+                similar_products=""
             match = False
 
         # Render: template showing product result
-        return render_template("buyers/search_result.html", cust_result_list=cust_result_list,file_name=file.filename, match = match, matching_products=matching_products,similar_products=similar_products,search_image=image_url)
+        if len(similar_products)==0 and matching_products=="":
+            return redirect(url_for('buyers.search_error'))
+        else:
+            return render_template("buyers/search_result.html", cust_result_list=cust_result_list,file_name=file.filename, match = match, matching_products=matching_products,similar_products=similar_products,search_image=image_url)
 
     return "Failed"
 
-@buyers_blueprint.route('/<id>/edit', methods=['GET'])
-def edit(id):
-    pass
 
 
 @buyers_blueprint.route('/<id>', methods=['POST'])
 def update(id):
     pass
+
+# JM Search Error result
+@buyers_blueprint.route('/search_error', methods=['GET'])
+def search_error():
+
+    return render_template("buyers/search_not_found.html")

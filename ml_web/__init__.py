@@ -5,14 +5,12 @@ from flask_assets import Environment, Bundle
 from ml_web.util.assets import bundles
 import os
 import config
-from ml_web.helpers.google_oauth import oauth
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from models.user import User
 
 
 
-oauth.init_app(app)
 
 csrf = CSRFProtect(app)
 
@@ -40,6 +38,22 @@ app.register_blueprint(sessions_blueprint, url_prefix="/sessions")
 def internal_server_error(e):
     return render_template('500.html'), 500
 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')
+
+@app.errorhandler(401)
+def page_not_found(e):
+    return render_template('401.html')
+
+@app.errorhandler(400)
+def page_not_found(e):
+    return render_template('400.html')
+
+@app.errorhandler(405)
+def page_not_found(e):
+    return render_template('405.html')
 
 @app.route("/")
 def home():
