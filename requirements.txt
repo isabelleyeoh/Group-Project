@@ -21,6 +21,7 @@ Flask-WTF==0.14.2
 future==0.17.1
 googleapis-common-protos==1.5.8
 grpcio==1.19.0
+gunicorn==19.9.0
 idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.10
@@ -29,6 +30,7 @@ jsmin==2.2.2
 jsonschema==2.6.0
 MarkupSafe==1.1.1
 peewee==3.8.2
+peewee-db-evolve==3.7.0
 Pillow==5.4.1
 protobuf==3.7.0
 psycopg2-binary==2.7.7
