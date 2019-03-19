@@ -78,7 +78,7 @@ Login
 
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /><br>
         <button type='submit' class='btn btn-primary col-12 form-group'>SignIn</button>
-        <p class='text-center'>Don't have an accont? <a href="{{ url_for('sessions.option') }}">Sign
+        <p class='text-center'>Don't have an accont? <a href="{{ url_for('sessions.option', usertype=usertype) }}">Sign
             Up</a></p>
       </form>
 
@@ -96,7 +96,7 @@ Login
 
   window.fbAsyncInit = function () {
     FB.init({
-      appId: '432097757527438',
+      appId: '430830920826038',
       cookie: true,
 
       xfbml: true,
@@ -152,7 +152,7 @@ Login
     FB.api('/me', { fields: 'name,email' }, (response) => {
       console.log(response.email);
 
-      fetch('http://snapshop.herokuapp.com/api/v1/login', {
+      fetch('https://snapshop.herokuapp.com/api/v1/login', {
         method: 'POST',
         headers: new Headers({
           'content-type': 'application/json'
