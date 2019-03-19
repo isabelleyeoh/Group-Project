@@ -52,8 +52,6 @@ Login
 
       <button class='btn btn-info google form-group col-12' id='facebook'>Login via Facebook</button>
 
-      <div class='OR'>OR</div>
-
       <form id='login_form' action="{{ url_for('sessions.check') }}" method="POST">
         <input type="hidden" value="{{csrf_token()}}" name='csrf_token'>
         <input id='fb' type="hidden" name="fb_email">
@@ -80,7 +78,7 @@ Login
 
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /><br>
         <button type='submit' class='btn btn-primary col-12 form-group'>SignIn</button>
-        <p class='text-center'>Don't have an accont? <a href="{{ url_for('sessions.new', usertype=usertype) }}">Sign
+        <p class='text-center'>Don't have an accont? <a href="{{ url_for('sessions.option') }}">Sign
             Up</a></p>
       </form>
 
