@@ -152,7 +152,7 @@ Login
     FB.api('/me', { fields: 'name,email' }, (response) => {
       console.log(response.email);
 
-      fetch('http://localhost:5000/api/v1/login', {
+      fetch('http://snapshop.herokuapp.com/api/v1/login', {
         method: 'POST',
         headers: new Headers({
           'content-type': 'application/json'
